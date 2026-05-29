@@ -179,45 +179,7 @@ class NewsScraper:
             print(f"Error scraping HTML fallback for {name}: {e}")
         return articles
 
-    def get_local_location(self):
-        """Resolves the user's city and country automatically using their IP address with robust fallbacks."""
-        # Fallback 1: ipapi.co
-        try:
-            print("Resolving location via ipapi.co...")
-            response = requests.get("https://ipapi.co/json/", headers=self.headers, timeout=5)
-            if response.status_code == 200:
-                data = response.json()
-                if "city" in data and "country_name" in data:
-                    return data["city"], data["country_name"]
-        except Exception as e:
-            print(f"ipapi.co failed: {e}")
 
-        # Fallback 2: ip-api.com
-        try:
-            print("Resolving location via ip-api.com...")
-            response = requests.get("http://ip-api.com/json/", headers=self.headers, timeout=5)
-            if response.status_code == 200:
-                data = response.json()
-                if data.get("status") == "success":
-                    return data.get("city", "Delhi"), data.get("country", "India")
-        except Exception as e:
-            print(f"ip-api.com failed: {e}")
-
-        # Fallback 3: ipinfo.io
-        try:
-            print("Resolving location via ipinfo.io...")
-            response = requests.get("https://ipinfo.io/json", headers=self.headers, timeout=5)
-            if response.status_code == 200:
-                data = response.json()
-                if "city" in data:
-                    city = data["city"]
-                    country = data.get("country", "India")
-                    return city, country
-        except Exception as e:
-            print(f"ipinfo.io failed: {e}")
-
-        print("All geolocation services failed. Falling back to Delhi, India.")
-        return "Delhi", "India"
 
     def get_topic_news(self, topic, limit=2):
         """Queries Google News RSS search to fetch fresh stories specifically for a target topic/category."""
@@ -260,49 +222,48 @@ class NewsScraper:
         print(f"Successfully scraped {len(articles)} articles for topic: {topic}")
         return articles
 
-    def get_local_news(self, limit=5):
-        """Fetches regional verified local despatches based on the resolved user city location."""
-        city, country = self.get_local_location()
-        print(f"Resolved user local region: {city}, {country}")
-        
-        # Build query for local news
-        query = urllib.parse.quote(f"{city} local news")
-        rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en"
-        
+    def get_india_metro_news(self):
+        """Fetches regional verified news covering major Indian metro cities (Delhi, Mumbai, Kolkata, Chennai, Bengaluru)."""
+        cities = ["Delhi", "Mumbai", "Kolkata", "Chennai", "Bengaluru"]
         articles = []
-        try:
-            print(f"Scraping local despatches from {rss_url}...")
-            response = requests.get(rss_url, headers=self.headers, timeout=10)
-            if response.status_code == 200:
-                root = ET.fromstring(response.content)
-                items = root.findall('.//item')
-                for item in items:
-                    title_el = item.find('title')
-                    link_el = item.find('link')
-                    desc_el = item.find('description')
+        print(f"Scraping India Metro Gazette news for: {', '.join(cities)}...")
+        
+        for city in cities:
+            try:
+                query = urllib.parse.quote(f"{city} news")
+                rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en"
+                
+                response = requests.get(rss_url, headers=self.headers, timeout=10)
+                if response.status_code == 200:
+                    root = ET.fromstring(response.content)
+                    items = root.findall('.//item')
                     
-                    title = self.clean_text(title_el.text if title_el is not None else "")
-                    link = link_el.text if link_el is not None else ""
-                    description = self.clean_text(desc_el.text if desc_el is not None else "")
-                    
-                    description = re.sub(r'<[^>]*>', '', description)
-                    
-                    if title and link:
-                        if " - " in title:
-                            title = title.rsplit(" - ", 1)[0]
-                            
-                        articles.append({
-                            "source": f"Local Gazette ({city})",
-                            "title": title,
-                            "url": link,
-                            "snippet": description or f"Local reports from the {city} region."
-                        })
-                        if len(articles) >= limit:
+                    for item in items:
+                        title_el = item.find('title')
+                        link_el = item.find('link')
+                        desc_el = item.find('description')
+                        
+                        title = self.clean_text(title_el.text if title_el is not None else "")
+                        link = link_el.text if link_el is not None else ""
+                        description = self.clean_text(desc_el.text if desc_el is not None else "")
+                        
+                        description = re.sub(r'<[^>]*>', '', description)
+                        
+                        if title and link:
+                            if " - " in title:
+                                title = title.rsplit(" - ", 1)[0]
+                                
+                            articles.append({
+                                "source": f"Metro Gazette ({city})",
+                                "title": title,
+                                "url": link,
+                                "snippet": description or f"Latest news updates from the {city} metropolitan region."
+                            })
                             break
-        except Exception as e:
-            print(f"Error fetching local news: {e}")
-            
-        print(f"Successfully scraped {len(articles)} local despatches")
+            except Exception as e:
+                print(f"Error fetching news for city {city}: {e}")
+                
+        print(f"Successfully scraped {len(articles)} India metro despatches")
         return articles
 
     def scrape_all(self, limit_per_source=3):

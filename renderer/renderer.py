@@ -42,8 +42,14 @@ class NewsRenderer:
             # Save rendered HTML to file
             with open(self.output_path, "w", encoding="utf-8") as f:
                 f.write(rendered_html)
-
             print(f"Rendered newsletter HTML to {self.output_path}")
+
+            # Also save to root index.html for static hosting platforms (like Vercel)
+            root_index_path = os.path.join(self.workspace_dir, "index.html")
+            with open(root_index_path, "w", encoding="utf-8") as f:
+                f.write(rendered_html)
+            print(f"Rendered Vercel Home HTML to {root_index_path}")
+
             return True
         except Exception as e:
             print(f"Error rendering newsletter: {e}")

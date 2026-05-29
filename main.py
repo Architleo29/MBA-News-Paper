@@ -41,11 +41,11 @@ def main():
     print("\n--- Phase 1: News Scraping ---")
     raw_articles = scraper.scrape_all(limit_per_source=args.limit)
     
-    # Fetch local news despatches based on location
-    local_articles = scraper.get_local_news(limit=5)
+    # Fetch India metro news despatches (covering major metro cities)
+    metro_articles = scraper.get_india_metro_news()
     
-    # Merge local articles into raw article list
-    raw_articles.extend(local_articles)
+    # Merge metro articles into raw article list
+    raw_articles.extend(metro_articles)
     
     if not raw_articles:
         print("No articles scraped. Exiting pipeline.")
@@ -69,7 +69,7 @@ def main():
             if any(w in text for w in keywords):
                 guessed = cat
                 break
-        if "Local Gazette" in article.get("source", ""):
+        if "Metro Gazette" in article.get("source", ""):
             represented_categories.add("Local")
         else:
             represented_categories.add(guessed)
@@ -96,8 +96,8 @@ def main():
         # AI Summarization
         analysis = summarizer.summarize(article['title'], content)
         
-        # Force category to 'Local' if the article is from the local gazette
-        category = "Local" if "Local Gazette" in article.get("source", "") else analysis["category"]
+        # Force category to 'Local' if the article is from the metro gazette
+        category = "Local" if "Metro Gazette" in article.get("source", "") else analysis["category"]
         
         # Merge analysis back into article dict
         enriched_article = {
@@ -125,6 +125,17 @@ def main():
             json.dump(payload, f, indent=2)
             
         print(f"Successfully saved structured JSON data to {data_file}")
+
+        # Copy preference card to root as preference.html for static hosting (Vercel)
+        import shutil
+        pref_src = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".jetro", "frames", "preference_card.html")
+        pref_dest = os.path.join(os.path.dirname(os.path.abspath(__file__)), "preference.html")
+        try:
+            shutil.copy(pref_src, pref_dest)
+            print(f"Successfully copied preference card to root: {pref_dest}")
+        except Exception as e:
+            print(f"Error copying preference card to root: {e}")
+
         print("\nPipeline execution completed successfully!")
         print("Ready to update the Jetro Canvas frame.")
     else:
