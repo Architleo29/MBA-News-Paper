@@ -107,6 +107,11 @@ def main():
             "sentiment": analysis["sentiment"]
         }
         enriched_articles.append(enriched_article)
+        
+        # Sleep to satisfy Gemini API 15 RPM free tier rate limits
+        if summarizer.client and i < len(raw_articles):
+            import time
+            time.sleep(4.5)
 
     # Step 3: Render to HTML
     print("\n--- Phase 3: Canvas Rendering ---")
