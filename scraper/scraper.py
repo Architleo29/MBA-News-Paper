@@ -12,17 +12,17 @@ class NewsScraper:
             "Accept-Language": "en-US,en;q=0.5",
         }
         self.sources = {
-            "Hindustan Times": "https://www.hindustantimes.com/",
-            "Times of India": "https://timesofindia.indiatimes.com/us",
-            "Reuters": "https://www.reuters.com/",
+            "Hindustan Times": "https://www.hindustantimes.com/business",
+            "Times of India": "https://timesofindia.indiatimes.com/business",
+            "Reuters": "https://www.reuters.com/business",
             "Bloomberg": "https://www.bloomberg.com/"
         }
-        # Direct high-fidelity RSS endpoints for local news + Google News RSS bypasses for protected global news
+        # Direct high-fidelity RSS endpoints focusing specifically on business, corporate, finance, and macroeconomics
         self.rss_endpoints = {
-            "Hindustan Times": "https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml",
-            "Times of India": "https://timesofindia.indiatimes.com/rssfeeds/296589292.cms",
-            "Reuters": "https://news.google.com/rss/search?q=source:Reuters&hl=en-US&gl=US&ceid=US:en",
-            "Bloomberg": "https://news.google.com/rss/search?q=source:Bloomberg&hl=en-US&gl=US&ceid=US:en"
+            "Hindustan Times": "https://news.google.com/rss/search?q=source:%22Hindustan+Times%22+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-IN&gl=IN&ceid=IN:en",
+            "Times of India": "https://news.google.com/rss/search?q=source:%22Times+of+India%22+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-IN&gl=IN&ceid=IN:en",
+            "Reuters": "https://news.google.com/rss/search?q=source:Reuters+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-US&gl=US&ceid=US:en",
+            "Bloomberg": "https://news.google.com/rss/search?q=source:Bloomberg+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-US&gl=US&ceid=US:en"
         }
 
     def clean_text(self, text):
@@ -180,9 +180,9 @@ class NewsScraper:
 
 
     def get_topic_news(self, topic, limit=2):
-        """Queries Google News RSS search to fetch fresh stories specifically for a target topic/category."""
+        """Queries Google News RSS search to fetch fresh stories specifically for a target topic/category with a business/management slant."""
         print(f"Scraping category-specific news for topic: {topic}...")
-        query = urllib.parse.quote(topic)
+        query = urllib.parse.quote(f"{topic} (business OR economy OR corporate OR industry OR markets)")
         rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en"
         
         articles = []
@@ -221,14 +221,14 @@ class NewsScraper:
         return articles
 
     def get_india_metro_news(self):
-        """Fetches regional verified news covering major Indian metro cities (Delhi, Mumbai, Kolkata, Chennai, Bengaluru)."""
+        """Fetches regional verified business and infrastructure news covering major Indian metro cities (Delhi, Mumbai, Kolkata, Chennai, Bengaluru)."""
         cities = ["Delhi", "Mumbai", "Kolkata", "Chennai", "Bengaluru"]
         articles = []
         print(f"Scraping India Metro Gazette news for: {', '.join(cities)}...")
         
         for city in cities:
             try:
-                query = urllib.parse.quote(f"{city} news")
+                query = urllib.parse.quote(f"{city} (business OR corporate OR startups OR infrastructure OR economy OR real-estate)")
                 rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en"
                 
                 response = requests.get(rss_url, headers=self.headers, timeout=10)
