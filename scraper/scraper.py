@@ -12,7 +12,6 @@ class NewsScraper:
             "Accept-Language": "en-US,en;q=0.5",
         }
         self.sources = {
-            "The Hindu": "https://www.thehindu.com/",
             "Hindustan Times": "https://www.hindustantimes.com/",
             "Times of India": "https://timesofindia.indiatimes.com/us",
             "Reuters": "https://www.reuters.com/",
@@ -20,7 +19,6 @@ class NewsScraper:
         }
         # Direct high-fidelity RSS endpoints for local news + Google News RSS bypasses for protected global news
         self.rss_endpoints = {
-            "The Hindu": "https://www.thehindu.com/news/national/feeder/default.rss",
             "Hindustan Times": "https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml",
             "Times of India": "https://timesofindia.indiatimes.com/rssfeeds/296589292.cms",
             "Reuters": "https://news.google.com/rss/search?q=source:Reuters&hl=en-US&gl=US&ceid=US:en",
