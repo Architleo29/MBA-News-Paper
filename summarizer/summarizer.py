@@ -66,16 +66,23 @@ class NewsSummarizer:
         # Compute title hash for organic diversity
         hash_val = sum(ord(c) for c in clean_title)
         
+        # Datelines for real print-newspaper styling
+        datelines = [
+            "NEW DELHI —", "MUMBAI —", "LONDON —", "WASHINGTON —", 
+            "TOKYO —", "GENEVA —", "SINGAPORE —", "BEIJING —"
+        ]
+        dateline = datelines[hash_val % len(datelines)]
+        
         # Pattern variations for Lead (Sentence 1)
         lead_templates = [
-            f"Recent reports from {source_name} highlight a significant shift concerning '{clean_title}'.",
-            f"Coverage focused on '{clean_title}' has emerged as a major focus area in latest briefs from {source_name}.",
-            f"A fresh despatch published by {source_name} outlines new developments regarding '{clean_title}'.",
-            f"Observers are closely tracking the unfolding situation surrounding '{clean_title}', as reported by {source_name}.",
-            f"Details released by {source_name} shed new light on the evolving context of '{clean_title}'.",
-            f"An official briefing concerning '{clean_title}' has drawn wide attention across {source_name} channels.",
-            f"According to latest coverage by {source_name}, a pivotal change is currently taking place regarding '{clean_title}'.",
-            f"Journalists at {source_name} have highlighted key strategic details concerning '{clean_title}' in their latest update."
+            f"{dateline} A critical shift is unfolding as dispatches from {source_name} signal key structural changes regarding '{clean_title}'.",
+            f"{dateline} Per latest briefs from {source_name}, the evolving context surrounding '{clean_title}' has taken center stage.",
+            f"{dateline} An official statement published by {source_name} outlines dramatic strategic adjustments regarding '{clean_title}'.",
+            f"{dateline} International observers are closely tracking developments surrounding '{clean_title}', as reported by {source_name}.",
+            f"{dateline} Analysis published by {source_name} sheds new light on the underlying factors driving '{clean_title}'.",
+            f"{dateline} Public debates concerning '{clean_title}' have reached a critical inflection point, according to {source_name} coverage.",
+            f"{dateline} Major publications via {source_name} indicate a substantial transformation is underway regarding '{clean_title}'.",
+            f"{dateline} Chief strategists at {source_name} have highlighted key regulatory parameters regarding '{clean_title}'."
         ]
         
         # Pattern variations for Context (Sentence 2)
@@ -156,10 +163,17 @@ class NewsSummarizer:
         # If we have genuine filtered sentences, use them!
         if len(sentences) >= 5:
             s_list = sentences[:5]
+            # Prepend dateline to the first sentence to match print newspaper format
+            if s_list and not any(s_list[0].startswith(dl) for dl in datelines):
+                s_list[0] = f"{dateline} {s_list[0]}"
         else:
             # Seed our list with any scraped clean sentences we have
             s_list.extend(sentences)
             
+            # Prepend dateline to the first sentence if it's not a template
+            if s_list and not any(s_list[0].startswith(dl) for dl in datelines):
+                s_list[0] = f"{dateline} {s_list[0]}"
+                
             # Pad with unique randomized templates if we are short of 5
             if len(s_list) < 1:
                 s_list.append(lead_templates[hash_val % len(lead_templates)])
@@ -238,12 +252,18 @@ class NewsSummarizer:
             return self.fallback_summarize(title, content)
             
         prompt = f"""
-You are an expert news editor. Analyze the following news article title and content.
+You are an elite, veteran news editor for a premium classical newspaper. Your task is to write a cohesive, 5-sentence editorial dispatch summarizing the provided news article.
 Title: {title}
 Content: {content}
 
+Write in a formal, classical print-journalistic tone (like that of The Economist or The London Times). Follow these editorial guidelines:
+- Tone: Extremely professional, objective, authoritative, and sophisticated.
+- Structure: Start directly with a dateline prefix based on where the story is taking place (e.g., "LONDON —", "TOKYO —", "NEW DELHI —", "WASHINGTON —", or "BERLIN —" - if not obvious, default to a major international capital). Do not use introductory phrases like "This article is about" or "According to the report".
+- Flow: Synthesize the facts into a seamless, elegant 5-sentence narrative paragraph. Do not write a list of disconnected points. Let the narrative flow organically from the lead, through context and reactions, to the broader implications.
+- Verbs: Write in the active voice with strong, descriptive, and precise verbs (e.g., "signals", "spurs", "confronts", "navigates", "reverberates", "accelerates", "pivots").
+
 Provide a structured analysis in JSON format. The JSON must contain exactly these three keys:
-1. "summary": A comprehensive 5-sentence summary of the main points. Do not include introductory phrases.
+1. "summary": Your cohesive, 5-sentence editorial dispatch including the dateline prefix.
 2. "category": Categorize the article into exactly one of: "Politics", "Economy", "Technology", "World", "Sports", "Science", "General".
 3. "sentiment": Analyze the tone and categorize into exactly one of: "Positive", "Neutral", "Negative".
 
