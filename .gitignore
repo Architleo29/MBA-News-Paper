@@ -16,3 +16,4 @@ env/
 !metadata.json
 !plugin.json
 !manifest.json
+!vercel.json
