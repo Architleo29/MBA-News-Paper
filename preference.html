@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>News Feed Preferences</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,7 @@
       color: var(--text-main);
       font-family: var(--font-sans);
       padding: 20px;
-      overflow: hidden;
+      overflow-y: auto;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -182,6 +183,21 @@
       font-family: monospace;
       color: #34d399;
       font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+        justify-content: flex-start;
+      }
+      .pref-card {
+        padding: 16px;
+        border-radius: 12px;
+      }
+      .pill-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+      }
     }
   </style>
 </head>

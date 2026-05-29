@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmartNews Living Canvas - Classical Editorial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -347,6 +348,76 @@
       font-style: italic;
       font-size: 1.1rem;
     }
+
+    /* Mobile Responsiveness Improvements */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+
+      .masthead-title {
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+      }
+
+      .masthead-tagline {
+        font-size: 0.95rem;
+      }
+
+      .ruled-line-block {
+        flex-direction: column;
+        gap: 6px;
+        font-size: 0.75rem;
+        padding: 8px 6px;
+        text-align: center;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding-bottom: 12px;
+      }
+
+      .tabs {
+        width: 100%;
+        padding-bottom: 8px;
+        /* Hide scrollbars but allow native swipe */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+      }
+      
+      .tabs::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      .tab-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .news-title {
+        font-size: 1.15rem;
+      }
+      
+      .news-summary {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -360,7 +431,7 @@
         <div class="live-dot"></div>
         <span>Live Despatch</span>
       </div>
-      <span>Updated: <span id="last-update" class="time-badge">2026-05-29 12:21:56</span></span>
+      <span>Updated: <span id="last-update" class="time-badge">2026-05-29 12:23:12</span></span>
     </div>
   </header>
 
