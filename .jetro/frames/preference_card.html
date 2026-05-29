@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News Feed Preferences</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-primary: #8b5cf6;
+      --accent-secondary: #3b82f6;
+      --font-sans: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      padding: 20px;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pref-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pref-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #f8fafc 40%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .channel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      background: rgba(139, 92, 246, 0.1);
+      color: #c084fc;
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      font-family: monospace;
+      margin-bottom: 16px;
+    }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .pill-btn {
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .pill-btn:hover {
+      border-color: rgba(139, 92, 246, 0.4);
+      color: var(--text-main);
+      background: rgba(30, 41, 59, 0.7);
+    }
+
+    .pill-btn.active {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+    }
+
+    .custom-input-group {
+      display: flex;
+      gap: 8px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 4px;
+      transition: all 0.3s;
+    }
+
+    .custom-input-group:focus-within {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.15);
+    }
+
+    .custom-input {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      padding-left: 10px;
+      outline: none;
+      width: 100%;
+    }
+
+    .custom-input::placeholder {
+      color: rgba(148, 163, 184, 0.5);
+    }
+
+    .publish-btn {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .publish-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    .status-indicator {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 12px;
+    }
+
+    .token-display {
+      font-family: monospace;
+      color: #34d399;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="pref-card">
+  <h3>Feed Controller</h3>
+  <p>Select a topic to broadcast filtering to all living canvas frames instantly.</p>
+  
+  <div class="channel-badge">
+    <span>📡 C2 Channel:</span>
+    <strong>user-preference</strong>
+  </div>
+
+  <div class="pill-grid" id="pill-grid">
+    <button class="pill-btn active" data-token="all">#all</button>
+    <button class="pill-btn" data-token="technology">#technology</button>
+    <button class="pill-btn" data-token="economy">#economy</button>
+    <button class="pill-btn" data-token="politics">#politics</button>
+    <button class="pill-btn" data-token="world">#world</button>
+    <button class="pill-btn" data-token="science">#science</button>
+    <button class="pill-btn" data-token="fintech">#fintech</button>
+  </div>
+
+  <div class="custom-input-group">
+    <input type="text" id="custom-token" class="custom-input" placeholder="Or type a custom topic (e.g. #sports)">
+    <button id="custom-publish" class="publish-btn">Publish</button>
+  </div>
+
+  <div class="status-indicator">
+    <span>Active Broadcast:</span>
+    <span class="token-display" id="active-broadcast">#all</span>
+  </div>
+</div>
+
+<script>
+  const channelName = "user-preference";
+
+  function publishToken(token) {
+    console.log(`Publishing token '${token}' to channel '${channelName}'`);
+    
+    // 1. Post to parent (Jetro core) using multiple protocol formats
+    if (window.parent) {
+      // Format A: Standard Event
+      window.parent.postMessage({
+        type: "jet:publish",
+        channel: channelName,
+        data: token
+      }, "*");
+      
+      // Format B: Alternative direct
+      window.parent.postMessage({
+        type: "publish",
+        channel: channelName,
+        payload: token
+      }, "*");
+
+      // Format C: Standard C2 event
+      window.parent.postMessage({
+        action: "publish",
+        channel: channelName,
+        value: token
+      }, "*");
+    }
+
+    // 2. Local Document custom event in case of local frame aggregation
+    const customEvent = new CustomEvent(channelName, { detail: token });
+    document.dispatchEvent(customEvent);
+
+    // Update display
+    document.getElementById('active-broadcast').textContent = token.startsWith('#') ? token : '#' + token;
+  }
+
+  // Handle Pill selection
+  document.getElementById('pill-grid').addEventListener('click', (e) => {
+    if (e.target.classList.contains('pill-btn')) {
+      document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      const token = e.target.getAttribute('data-token');
+      publishToken(token);
+    }
+  });
+
+  // Handle Custom Input Publish
+  document.getElementById('custom-publish').addEventListener('click', () => {
+    const input = document.getElementById('custom-token');
+    let value = input.value.trim().toLowerCase();
+    if (value) {
+      // strip hash if typed
+      if (value.startsWith('#')) {
+        value = value.substring(1);
+      }
+      // Deactivate all pills
+      document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+      publishToken(value);
+      input.value = '';
+    }
+  });
+</script>
+
+</body>
+</html>

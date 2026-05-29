@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartNews Living Canvas - Classical Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-bg: #f9f8f4;
+      --ink-dark: #1c1917;
+      --ink-muted: #57534e;
+      --border-sep: #d6d3d1;
+      --border-ruled: #1c1917;
+      --accent-burgundy: #7f1d1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lora', Georgia, serif;
+      --font-sans: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--paper-bg);
+      color: var(--ink-dark);
+      font-family: var(--font-body);
+      padding: 30px;
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Scrollbar Styling - Vintage feel */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1ebd9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--ink-muted);
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Traditional Newspaper Header Block */
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .masthead-title {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: var(--ink-dark);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .masthead-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+
+    /* Double Ruled Lines for traditional print look */
+    .ruled-line-block {
+      border-top: 4px double var(--border-ruled);
+      border-bottom: 1.5px solid var(--border-ruled);
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-serif);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: var(--ink-dark);
+      margin-bottom: 24px;
+    }
+
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-burgundy);
+      font-weight: bold;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--accent-burgundy);
+      border-radius: 50%;
+      animation: pulse 2.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .time-badge {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Controls & Tabs Styling */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid var(--border-sep);
+      padding-bottom: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--ink-muted);
+      padding: 6px 12px;
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--ink-dark);
+      border-bottom: 2px solid var(--ink-dark);
+    }
+
+    .tab-btn.active {
+      color: var(--accent-burgundy);
+      border-bottom: 2px solid var(--accent-burgundy);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border-sep);
+      background: #ffffff;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      color: var(--ink-dark);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      outline: none;
+      width: 180px;
+    }
+
+    .search-input::placeholder {
+      color: var(--ink-muted);
+      opacity: 0.6;
+    }
+
+    /* Column-based Newspaper Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 32px 24px;
+    }
+
+    /* Story / Card Styling */
+    .news-card {
+      background: transparent;
+      border: none;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--border-sep);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .news-card:hover {
+      opacity: 0.95;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .source-badge {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .category-badge {
+      font-family: var(--font-serif);
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--accent-burgundy);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--accent-burgundy);
+      padding-bottom: 1px;
+    }
+
+    .sentiment-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--ink-muted);
+    }
+
+    .sentiment-positive { background-color: #065f46; }
+    .sentiment-neutral { background-color: var(--ink-muted); }
+    .sentiment-negative { background-color: #991b1b; }
+
+    .news-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: var(--ink-dark);
+      letter-spacing: -0.2px;
+    }
+
+    .news-card:hover .news-title {
+      color: var(--accent-burgundy);
+      text-decoration: underline;
+    }
+
+    /* Paragraph summary - Drop cap effect & typography */
+    .news-summary {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--ink-dark);
+      text-align: justify;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 5; /* Limit to 5 lines on preview */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    /* Elegant drop cap on the first letter */
+    .news-summary::first-letter {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 800;
+      float: left;
+      line-height: 0.85;
+      margin: 4px 6px 0 0;
+      color: var(--accent-burgundy);
+    }
+
+    .news-card.expanded .news-summary {
+      display: block;
+      -webkit-line-clamp: unset;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      font-size: 0.8rem;
+    }
+
+    .read-more {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      color: var(--ink-dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .read-more:hover {
+      color: var(--accent-burgundy);
+    }
+
+    .expand-btn {
+      background: transparent;
+      border: none;
+      color: var(--ink-muted);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .expand-btn:hover {
+      color: var(--ink-dark);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--ink-muted);
+      border: 1px dashed var(--border-sep);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1 class="masthead-title">The Daily Living Canvas</h1>
+    <div class="ruled-line-block">
+      <span>Volume I • Issue I</span>
+      <div class="live-status">
+        <div class="live-dot"></div>
+        <span>Live Despatch</span>
+      </div>
+      <span>Updated: <span id="last-update" class="time-badge">2026-05-29 12:00:24</span></span>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="tabs" id="category-tabs">
+      <button class="tab-btn active" data-category="all">All News</button>
+      <button class="tab-btn" data-category="technology">Technology</button>
+      <button class="tab-btn" data-category="economy">Economy</button>
+      <button class="tab-btn" data-category="politics">Politics</button>
+      <button class="tab-btn" data-category="world">World</button>
+      <button class="tab-btn" data-category="science">Science</button>
+      <button class="tab-btn" data-category="sports">Sports</button>
+      <button class="tab-btn" data-category="general">General</button>
+      <button class="tab-btn" data-category="local">Local Gazette</button>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="search-input" class="search-input" placeholder="Search despatches...">
+    </div>
+  </div>
+
+  <div class="news-grid" id="news-grid">
+    
+      
+      <div class="news-card" data-category="technology" data-title="delhi hc refuses to immediately restore cockroach janta party’s x account in india">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">The Hindu</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Delhi HC refuses to immediately restore Cockroach Janta Party’s X account in India</h2>
+        <p class="news-summary">Subscribed with another email? Logout and Login with that one. Account subscription benefits alongside Premium Stories, Editorials, Opinions and more. Unlock these with Subscription Abhijeet Dipke, founder of Cockroach Janta Party, and, right, the mascot of the online outfit. | Photo Credit: Special Arrangement The Delhi High Court on Friday (May 29, 2026) declined immediate relief to Cockroach Janta Party’s (CJP) founder Abhijeet Dipke over the blocking of the party’s X handle.</p>
+        <div class="card-footer">
+          <a href="https://www.thehindu.com/news/national/delhi-hc-refuses-to-immediately-restore-cockroach-janta-partys-x-account-in-india/article71036143.ece" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="internal bickering, resignations and public anger, trinamool battling on multiple fronts">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">The Hindu</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
+        </div>
+        <h2 class="news-title">Internal bickering, resignations and public anger, Trinamool battling on multiple fronts</h2>
+        <p class="news-summary">Subscribed with another email? Logout and Login with that one. Account subscription benefits alongside Premium Stories, Editorials, Opinions and more. Unlock these with Subscription Updated - May 29, 2026 11:42 am IST - Kolkata TMC MP and advocate Kalyan Banerjee. FIle | Photo Credit: PTI Three weeks after suffering an electoral defeat in West Bengal, the Trinamool Congress continues to battle on multiple fronts, which include internal bickering, resignation and mounting public anger against local level functionaries of the party.</p>
+        <div class="card-footer">
+          <a href="https://www.thehindu.com/news/national/west-bengal/internal-bickering-resignations-and-public-anger-trinamool-battling-on-multiple-fronts/article71034091.ece" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="fishermen seek infrastructure, training to revive tuna fishing harbour in tiruvottiyur">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">The Hindu</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Fishermen seek infrastructure, training to revive tuna fishing harbour in Tiruvottiyur</h2>
+        <p class="news-summary">Subscribed with another email? Logout and Login with that one. Account subscription benefits alongside Premium Stories, Editorials, Opinions and more. Unlock these with Subscription Updated - May 29, 2026 11:33 am IST - CHENNAI The harbour, which was envisaged as far back as 2015, was opened for use some time ago but is currently under lock and key | Photo Credit: B. Jothi Ramalingam Fishermen in Chennai have urged the Tamil Nadu government to train them in tuna gill-net fishing and provide loans for the purchase of specialised boats and nets.</p>
+        <div class="card-footer">
+          <a href="https://www.thehindu.com/news/cities/chennai/fishermen-seek-infrastructure-training-to-revive-tuna-fishing-harbour-in-tiruvottiyur/article71030741.ece" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="kerala private bus industry ignored in policy address, say operators">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">The Hindu</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Kerala private bus industry ignored in policy address, say operators</h2>
+        <p class="news-summary">Subscribed with another email? Logout and Login with that one. Account subscription benefits alongside Premium Stories, Editorials, Opinions and more. Unlock these with Subscription Published - May 29, 2026 11:33 am IST - THIRUVANANTHAPURAM Kerala Bus Operators Federation has said the policy address delivered by Kerala Governor Rajendra Arlekar on Friday disappointed the private bus industry in the State. (file image) | Photo Credit: THULASI KAKKAT Kerala Bus Operators Federation has said the policy address delivered by Kerala Governor Rajendra Arlekar on Friday disappointed the private bus industry in the State.</p>
+        <div class="card-footer">
+          <a href="https://www.thehindu.com/news/national/kerala/kerala-private-bus-industry-ignored-in-policy-address-say-operators/article71036053.ece" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="sc sets three-month deadline on high courts to pronounce judgment in a case">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">The Hindu</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-negative" title="Sentiment: Negative"></div>
+        </div>
+        <h2 class="news-title">SC sets three-month deadline on High Courts to pronounce judgment in a case</h2>
+        <p class="news-summary">Subscribed with another email? Logout and Login with that one. Account subscription benefits alongside Premium Stories, Editorials, Opinions and more. Unlock these with Subscription Supreme Court of India in New Delhi. | Photo Credit: The Hindu The Supreme Court on Friday (May 29, 2026) set a three-month deadline on High Courts for pronouncement of judgment in a case.</p>
+        <div class="card-footer">
+          <a href="https://www.thehindu.com/news/national/sc-sets-three-month-deadline-on-high-courts-to-pronounce-judgment-in-a-case/article71036057.ece" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="sc introduces nationwide judicial timelines to tackle delays in high courts">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Hindustan Times</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
+        </div>
+        <h2 class="news-title">SC introduces nationwide judicial timelines to tackle delays in high courts</h2>
+        <p class="news-summary">The Supreme Court on Friday issued a sweeping set of binding directions to all high courts across the country, mandating that bail applications be decided on the same day or, at the latest, within 24 hours of hearing, while also fixing a three-month outer limit for pronouncement of reserved judgments. In a landmark move aimed at tackling judicial delays affecting personal liberty and speedy justice, a bench comprising Chief Justice of India Surya Kant and Justice Joymalya Bagchi laid down an extensive framework to institutionalise transparency, accountability and timelines in judicial functioning, holding that intervention by the apex court had become necessary “for complete justice to the parties”. The ruling came in proceedings arising...</p>
+        <div class="card-footer">
+          <a href="https://www.hindustantimes.com/india-news/sc-introduces-nationwide-judicial-timelines-to-tackle-delays-in-high-courts-101780035164404.html" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="punjab civic body results: aap shines, congress trailing behind, bjp falters | top points">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Hindustan Times</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Punjab civic body results: AAP shines, Congress trailing behind, BJP falters | Top points</h2>
+        <p class="news-summary">The counting of votes for the Punjab civics body polls is currently underway across the state to declare the results of the 102 Municipal Corporations, Municipal Councils and Nagar Panchayats. The votes for the 102 civics bodies in Punjab were cast on Tuesday through ballot papers with more than 7,500 candidates in fray. The election is being seen as a semi final to the upcoming Punjab assembly elections where the ruling Aam Aadmi Party (AAP) is looking to defy state’s general electoral history and retain power. Follow latest updates on Punjab civic body results A total of 22,38,241 votes were polled across 102 municipalities, including Municipal Corporations, Municipal Councils and Nagar Panchayats. The elections covered 1,897 wards and...</p>
+        <div class="card-footer">
+          <a href="https://www.hindustantimes.com/india-news/punjab-civic-body-results-aap-shines-congress-trailing-behind-bjp-falters-top-points-101780034025069.html" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="setback for cockroach janta party, delhi hc refuses to immediately restore x account as content 'slightly offensive'">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Hindustan Times</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
+        </div>
+        <h2 class="news-title">Setback for Cockroach Janta Party, Delhi HC refuses to immediately restore X account as content 'slightly offensive'</h2>
+        <p class="news-summary">In a legal setback for the Cockroach Janta Party, the Delhi High Court on Friday declined to immediately direct restoration of the X account of Abhijeet Dipke-led Cockroach Janata Party (CJP). The court found some content posted on the social media account to be “slightly offensive”, and refused to grant immediate relief on the plea by founder Dipke. The court said that the issue required “holistic consideration” and that any order would be passed only after hearing what the government and the X platform has to say. Abhijeet Dipke was represented by advocate Akhil Sibal, who sought the restoration of CJP's X account, even as he said he was fine if some of the allegedly offensive posts remained blocked. To support his argument, Sibal ment...</p>
+        <div class="card-footer">
+          <a href="https://www.hindustantimes.com/india-news/setback-for-cockroach-janata-party-delhi-hc-refuses-to-immediately-restore-x-account-as-content-slightly-offensive-101780033881553.html" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="delhi gets respite from heat as rain, strong winds lash parts of city; imd issues orange alert">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Hindustan Times</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
+        </div>
+        <h2 class="news-title">Delhi gets respite from heat as rain, strong winds lash parts of city; IMD issues Orange alert</h2>
+        <p class="news-summary">A sweltering Thursday gave way to a refreshing evening as intense rain and winds up to 60 km/hr swept through the city, dropping temperatures by 6–10°C by 7pm, officials said. The Met department has issued an “orange” alert for Friday, forecasting multiple spells of light rain and gusty winds up to 80 km/h. Light rain is also likely over the weekend, ending the month on a relatively cooler note, officials said. While Delhi’s maximum temperature stood at 41.1°C on Thursday, the “feel-like” temperature or the Heat Index was a season high of 48.2°C, according to India Meteorological Department (IMD). The minimum temperature was recorded at 28.4°C, two degrees above normal.</p>
+        <div class="card-footer">
+          <a href="https://www.hindustantimes.com/india-news/delhi-gets-respite-from-heat-as-rain-strong-winds-lash-parts-of-city-imd-issues-orange-alert-101780033235639.html" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="satellite imagery shows massive cloud belt over north, central india; delhi braces for more rain">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Hindustan Times</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-negative" title="Sentiment: Negative"></div>
+        </div>
+        <h2 class="news-title">Satellite imagery shows massive cloud belt over north, central India; Delhi braces for more rain</h2>
+        <p class="news-summary">A satellite image issued by the IMD depicts a massive cloud band extending over much of North and Central India. Recent thermal infrared data from the INSAT-3DS weather satellite points to a strong development of rain-bearing weather systems across the subcontinent. The cloud belt can be seen coming from Pakistan, covering large parts across northwest India across Punjab, Haryana, Delhi, Uttar Pradesh and parts of central India before moving over eastern India and the Bay of Bengal. The National Capital also recorded high temperatures, crossing 45 degrees Celsius mark at various stations. However, Delhi residents got some relief on Thursday as heavy rain, thunderstorms, and gusty winds swept across parts of the city.</p>
+        <div class="card-footer">
+          <a href="https://www.hindustantimes.com/india-news/satellite-imagery-shows-massive-cloud-belt-over-north-central-india-delhi-braces-for-more-rain-101780029016125.html" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="meet shrey parikh: 14-year-old indian-origin spelling bee winner who spelled 32 words in 90 seconds">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Times of India</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Meet Shrey Parikh: 14-year-old Indian-origin Spelling Bee winner who spelled 32 words in 90 seconds</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Meet Shrey Parikh: 14-year-old Indian-origin Spelling Bee winner who spelled 32 words in 90 seconds'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for ...</p>
+        <div class="card-footer">
+          <a href="https://timesofindia.indiatimes.com/world/us/meet-shrey-parikh-14-year-old-indian-origin-spelling-bee-winner-who-spelled-32-words-in-90-seconds/articleshow/131383426.cms" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="meet antoine moses: canadian ‘tree lover’ sets a second guinness world record by planting 47,460 trees in just 24 hours on the kenyan coast">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Times of India</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Meet Antoine Moses: Canadian ‘tree lover’ sets a second Guinness World Record by planting 47,460 trees in just 24 hours on the Kenyan coast</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Meet Antoine Moses: Canadian ‘tree lover’ sets a second Guinness World Record by planting 47,460 trees in just 24 hours on the Kenyan coast'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to ...</p>
+        <div class="card-footer">
+          <a href="https://timesofindia.indiatimes.com/world/rest-of-world/meet-antoine-moses-canadian-tree-lover-sets-a-second-guinness-world-record-by-planting-47460-trees-in-just-24-hours-on-the-kenyan-coast/articleshow/131381844.cms" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="a 2,000-year-old stone found in karnak temple reveals a roman emperor hidden in the form of an egyptian pharaoh">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Times of India</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">A 2,000-year-old stone found in Karnak temple reveals a Roman emperor hidden in the form of an Egyptian pharaoh</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'A 2,000-year-old stone found in Karnak temple reveals a Roman emperor hidden in the form of an Egyptian pharaoh'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified...</p>
+        <div class="card-footer">
+          <a href="https://timesofindia.indiatimes.com/world/rest-of-world/a-2000-year-old-stone-found-in-karnak-temple-reveals-a-roman-emperor-hidden-in-the-form-of-an-egyptian-pharaoh/articleshow/131381493.cms" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="general" data-title="italy on red alert as france, portugal beat hottest may day record">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Times of India</span>
+            <span class="category-badge">General</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Italy on red alert as France, Portugal beat hottest May day record</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Italy on red alert as France, Portugal beat hottest May day record'. This development has emerged as a key talking point among industry analysts and policy experts monitoring the situation. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary general discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://timesofindia.indiatimes.com/world/europe/italy-on-red-alert-as-france-portugal-beat-hottest-may-day-record/articleshow/131380258.cms" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="why ‘looksmaxxing’ streamer androgenic got kicked off a jetstar flight despite claiming medical clearance?">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Times of India</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Why ‘Looksmaxxing’ streamer Androgenic got kicked off a Jetstar flight despite claiming medical clearance?</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Why ‘Looksmaxxing’ streamer Androgenic got kicked off a Jetstar flight despite claiming medical clearance?'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified sour...</p>
+        <div class="card-footer">
+          <a href="https://timesofindia.indiatimes.com/world/us-streamers/why-looksmaxxing-streamer-androgenic-got-kicked-off-a-jetstar-flight-despite-claiming-medical-clearance/articleshow/131379678.cms" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="politics" data-title="us-iran mou on 60-day ceasefire extension reached, but trump must approve, sources say">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Politics</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">US-Iran MOU on 60-day ceasefire extension reached, but Trump must approve, sources say</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'US-Iran MOU on 60-day ceasefire extension reached, but Trump must approve, sources say'. The event marks a crucial legislative milestone that is expected to provoke policy shifts and challenge existing governance frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary politics discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxPcmtYNmpNOXg4SFczcnFmbWt0UDhOMktQZmtQcHQ2TE14QnV1ZkVvY2FtakZWRWNPaHlPZGI0WEp3ODViVVhSR05ldV85SDFVS2Vqa1JjZWJqX1BuUFh2QUFBaWgtZlRSd20xZEFYUlZhTG84VTRMd1hMay1LSE9aSTNqTDY1dlNLNnc2UlpIMThjUFJxOVlrTVhIV0pjbkZoMnlMdm5meDZPU2ZUbGRnSW5aUDdXM21uWHk4dEh4b3NGcm50OElUZF9wOA?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="us probes reid hoffman group over funding lawsuits against trump, source says">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">US probes Reid Hoffman group over funding lawsuits against Trump, source says</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'US probes Reid Hoffman group over funding lawsuits against Trump, source says'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNQkh6MW1ZR1ZndFF6NU9EMWp1Rll1RzIxOUs4SS1udFNQd0w2d3p5NTh5SUlfY3VjcVduZVNsbEgwblEwUVd6WTlNVlRDUHA0dHFkV1htZWRUS05fQXN1NUVwS1NIUXRTRVgtMHlEcS02T2tiaWk0bjBBaFJFaTZBVDUzZWdHVDNOU2pHUGVBVjdEVUtnLXhHenBOMFlHT2tVLV82MlVGRVo1cW9Za2IwNTJFamVSZw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="groq raising up to $650 million from existing investors, source says">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Groq raising up to $650 million from existing investors, source says</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Groq raising up to $650 million from existing investors, source says'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQaUFhS2xtU3l1R2ZWeXc0RFVHUFNIWWZJNFJPblhxeXd3WHhSSklEa0VhdFg0Q2J3dW1NekpTT3hydDJZekFGdm5MZUJPNVp1MmVXRUlhQU9DaE5wbWV1TjZfclhjbm5KdUVDeHpTdnNycmlUUV9iQjltRGg1a2dIZFlWMzh3dVpZRFdKNkVXcVRVYk1qU3duRUpZeWRnZXZzSHFnNC1uT0RteEhpX1JKeVdkd2x1S1gzZXk3Q1p3?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="exclusive: china works on ai token futures market, sources say, in race with us">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Exclusive: China works on AI token futures market, sources say, in race with US</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Exclusive: China works on AI token futures market, sources say, in race with US'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNU2htMEhYNVR5MlRObmtjRDFKMTJxelQxTklVT2c4YXIyUDBMY3FBcXRIT3lYX0RpX3dxTDlCcVJBNnRGb0MyN2luWF9RTldzNW1yWWNkdVhESHQ3d3Fwdzg3bzRGZ1paUG5LZ2N3NnpvemFRRFhaTXFocVBpYWM0OXRWWXhHNk9WR3haZGRmRVN1cXlzRDFrNklWQ2o5X2lvQkZmaUFFQ05nU3k2?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="exclusive: bytedance developing custom cpu chips to support ai rollout, sources say">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Exclusive: ByteDance developing custom CPU chips to support AI rollout, sources say</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Exclusive: ByteDance developing custom CPU chips to support AI rollout, sources say'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPTGJ6YVhfWFp5MUs5QXh5WE9MRnJlVTJORzUzanhPZGdkaWZ4Q2hyVnRGR3lvNFJ6M0xnNmp4aUR2N2x5UFRVaTQtXzVOZFlra3duR2tsYWlteE4zNk56Y0ZoRFdEOEJOc1JrNWl5clJYeWRYeF92UnlRcUdPNUxaSjRDRWFWekdGU284Rlo4aVZNc0VVcmNESUFyR3FScUp3OWtpcVhBd0NkOFZMSE5tYTdmTFRIN00?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="politics" data-title="us, iran agree to 60-day truce renewal pending trump signoff">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Bloomberg</span>
+            <span class="category-badge">Politics</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">US, Iran Agree to 60-Day Truce Renewal Pending Trump Signoff</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'US, Iran Agree to 60-Day Truce Renewal Pending Trump Signoff'. The event marks a crucial legislative milestone that is expected to provoke policy shifts and challenge existing governance frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary politics discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNVFNnOFFZeGRWVk1LUjFud1Q0cGdzN0RjcUZSSEd5UzdXY3RlTTUyeTAyMUprX2I2MkpLX1U2eVpYR3ZTU3FOb1EzMERvMmttLThnM0RLanAyeGhUd25OM3JDUkkzazdzenJJaXZvQmRmMy0zX0l5QUlWMzk5RHBSRHpJR3pvckFTMnQzZndZQmNJNjd3VUZtSERXUmFMT0RBVldYRVZwX1RCMmt4VW4zQkY2MDk?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="fhlbs remain a dependable source of funding: ryan donovan">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Bloomberg</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">FHLBs Remain a Dependable Source of Funding: Ryan Donovan</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'FHLBs Remain a Dependable Source of Funding: Ryan Donovan'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxQd05HTmZQY09MNG51UmZ2TEw0YmRPd0Z1MFpRTGZHdlpha21MLUE3aGg5MGF5S0Y3T0ZGcTRpM05XZmNjUzFic3BBc2p5aWZKMEpkOHFmWXhzS2lwdmlOLVloeVplZ0JlMHlTQlE0WEozTGx4ZGVBcXBnMUVlbWpMNERnN3FrQWVvenp2NDI2R05FMkNrTkthMkV1R2FXdHpCSUpJ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="anthropic eclipses openai with valuation of $965 billion">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Bloomberg</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Anthropic Eclipses OpenAI With Valuation of $965 Billion</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Anthropic Eclipses OpenAI With Valuation of $965 Billion'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNN1h0UGx5bEhpRDl2aFRVWWNQX2xHQjFfX2hXQWp3MzFkYUJmbzlESzBvN2hhQzZJb2xjRFFOd2FBTnppejg4a3ZqS3FOSi1idEF1c2ExZm9UNnh6WFY2ZXZQcXV3aFUtNGJVM29NUWpJSG1sb3ZhNFF5MG5TZllCQ2pUZWYxeXRCWkNuUkMwajZiN0lETmpjMVY1SXZEck1QcUdyVm1xLWJsQ2UyLVE?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="politics" data-title="oil spikes as renewed gulf attacks threaten fragile ceasefire">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Bloomberg</span>
+            <span class="category-badge">Politics</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Oil Spikes as Renewed Gulf Attacks Threaten Fragile Ceasefire</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Oil Spikes as Renewed Gulf Attacks Threaten Fragile Ceasefire'. The event marks a crucial legislative milestone that is expected to provoke policy shifts and challenge existing governance frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary politics discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQTkVCXzZXME5TRkVwSV9GZlZuTFFhWVpZT0x2R0ZJY3FPa1VXcVNzT1ZadlpkQUdSR1Q4SGlsVWdtS2tBVHhWNGZuZXJWdjBSUVY0MEc0RmVYcU9XcnA1MzJ0VXFpQ0IyX2NwRGpiR1piWE92S2JkUmVqMmtkNzFOREZtMmZzY3otWDY4cWloUEhJclJxUEltVTctZTYtdw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="technology" data-title="china ai upstart minimax doubles sales ahead of new model launch">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Bloomberg</span>
+            <span class="category-badge">Technology</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">China AI Upstart MiniMax Doubles Sales Ahead of New Model Launch</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'China AI Upstart MiniMax Doubles Sales Ahead of New Model Launch'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQOTN4ZmVxczBQQ21nVTBIazc4QzFMS3htbXRpeDVpdVlUck1FY29zbVpha0t2MFd4bnVMNGEzNXVPMUVYVUxYUlpVTlZyTTNwSHNOZmRvZ0pISURfS3JNOXlCOS14T044ZzJROFp5STFMeWtiajJkcGU5X1h3SDhYNWpTN2lMRkV5MkVtMXV5NkRvV1p4OHFqMnhLR01tMzg0Vk9Ndk52a0NueG1qMlV0R1JaZHJsZw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="local" data-title="political clashes rock kolkata neighbourhoods">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Local Gazette (Kolkata)</span>
+            <span class="category-badge">Local</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Political clashes rock Kolkata neighbourhoods</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Political clashes rock Kolkata neighbourhoods'. This development has emerged as a key talking point among industry analysts and policy experts monitoring the situation. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary general discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQUXVmYjB2VVViM3VwazduNDMycHFFa2ZaUGtPUkExR2gxOVNocHZCNGZBdF9zOVdRVkt6NHZfazhaTVRuOVY1VXc1bk9zSjFUYkZWaWZBRnJBUEw0X1VVaGNzX3ppZUJHakRHUEZHUUFTZ0RTbFpkcGl0WmEtb0ctb0hVeHoxeXR5azRQaTZ2MDQ3c1hZOGFZdWFqb3hWOXo1dHNJYnpRaEJWODRBWnpfYnFWU1NvWldzRURrS9IBwgFBVV95cUxQaEdGY2Jzc0JXOGk0VkJtUjdrZGtHZ3hwdDVQWjF6aXRadHlWZU1NcDBmQWpIUklGWTIwRHdaTk1aaTdsaGZDVG42YVRaRE5CUzJ5bFIxeEpwOUNjZlpsanV3eXVJUU01QjI3aHE3UWt0MWxtYU1HNXRuMERKcHlFaS1tUENmWDBUWEN5cEhVSEE1NW1sTjRlNVU2WXJFXzdWMVItU3VoX21jNUZJSjJ4UEJOX2duUW5mdWFxakZIY0p5QQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="local" data-title="kolkata police: approximately 300 voter, aadhaar cards found at tmc office in tangra">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Local Gazette (Kolkata)</span>
+            <span class="category-badge">Local</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Kolkata Police: Approximately 300 voter, Aadhaar cards found at TMC office in Tangra</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Kolkata Police: Approximately 300 voter, Aadhaar cards found at TMC office in Tangra'. This development has emerged as a key talking point among industry analysts and policy experts monitoring the situation. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary general discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMi3gFBVV95cUxQUlRrbXNlbDBXRi1saG5wTWd3dW1LVWRCQzVsd0dmY3Y0ZVQ3VFlUakJybEhRSlpaaUdLMlIxVmZIWUZCVHR6U3hMVXp1RE85UFBlbGdpc1c1SjdLbWhhWTVPbUlubDB2c1pYMXhYMDlZcGJ3V2VmRm81dVRkY2g3MmJOLXVuRXVSczc5NVV4RE1fNU9JbU1jRUpQbGFkX3RGOEprcmxLajZLVzBOYmQtTmNDQjdtVVVuRDJIOW5vT05nbE9oUmpod3h4VFp0ZFQxdnhHUWhXTUVOTG5JaFHSAeMBQVVfeXFMTTlaRzlWaTYtc3FtaWZSdEt2UkdEbElMc2lUdXZ6Q2pPakpBdmpjYkJkRDl4VmZNNHotaWJIRHk1ekpiMUJXN19jb3VHWHpsTHIzWDA0b2JxQTVPZzNVbmlXM29veVdmOUpIbHBNM0JFQTFHSkc0YWxqUnBCcDkwWElUdnY1aVhqMmVkTVZqS2IwMGVFZmFWRThQYlZGOWFzLXNfblRTQzdhRkVLTGxaQkdWbERic1ZtemNpaEl4cnhqZDB2U1E2RUZVMUktNWNXSG9tVWlOZGduQ3VBcTlaWjJPQVk?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="local" data-title="kolkata’s eid prayers held at iconic brigade parade ground, not red road, after decades">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Local Gazette (Kolkata)</span>
+            <span class="category-badge">Local</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Kolkata’s Eid prayers held at iconic Brigade Parade Ground, not Red Road, after decades</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Kolkata’s Eid prayers held at iconic Brigade Parade Ground, not Red Road, after decades'. This development has emerged as a key talking point among industry analysts and policy experts monitoring the situation. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary general discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPRzFIZGU5SW1yamRWanNFWDFmaVZRNVRIVGtCMW5GNlJ1ODZkWWZXZDlQQW5LVk84TmFOY2xLVDRaNXB5LVpzVmNGUmFCRnNkcnVBTVJnQVNGNlR0cFp1ZzlMZnhCa1k4R1d4Y1ZXbE5hX1R2YnNxeklaMHVINEN3ako4Q1FKenU1LUNNRTJaQ3pmSWdHNVB3cjFYZzhhb2J1S01idk1hODRfR05oTlZtSDE0NHlVRHl3aERN0gHAAUFVX3lxTE9FM013MnVEaG53SVM0WE9iUGM3TU16TGpZaThjUHg5ZnQtQ2FwZ2FPaWdzVmlNR3VkLVFpUkx5SjVDeW42TXQyTTFTb01RcWNVMklmRlRVbWJQMUFTVE11SVh3UkFxYnlpelcwbXdsQnpnNjVHX3RTTG12d0N4MHRpSV80RnkyYnk5bHNDUng3RjFmUTdBbXVURDhPcjhNWmFNUTNVM3dnX3VVcDAzZkNnMlFTdXVpc0xldkgySExsSw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="local" data-title="id prayers shifted to brigade ground in kolkata as bengal govt. imposes fresh curbs on bakrid celebrations">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Local Gazette (Kolkata)</span>
+            <span class="category-badge">Local</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Id prayers shifted to Brigade Ground in Kolkata as Bengal govt. imposes fresh curbs on Bakrid celebrations</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Id prayers shifted to Brigade Ground in Kolkata as Bengal govt. imposes fresh curbs on Bakrid celebrations'. This development has emerged as a key talking point among industry analysts and policy experts monitoring the situation. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary general discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMi_wFBVV95cUxQT1hqVjhNOWs5dU9JYk9VSXY5OHlwZndBRmRaSmFQeTdkeWhZeGpRQlg4OFpIbkptOTVodTFMTHZDcG0yTWRKNFJzcTVsMDdCbll2QzdONDlzWXM2eHhwNDZQQ19iM0d6UEk3Rk5BUWNWQV9HQk5ENzBGN0szTXpUTnpMQUtsVVlrN3FsOXZSbWFTQVc5WHBiZ1AxSTlkb3RZcWVNbkZiMHplWXA3YWZ5cW9vRWhGLXExYzFMRFRDNUZzM2ZhXzhGVWRKMzdwNXZrcUVRWVVwdENSalR4YWtscURPd3pOcFV1MnJnWDJ2eUw0Q3dQRTJEXzRMcjY4RzDSAYYCQVVfeXFMT0FKX21HTDZMSHd3OWNkbjhHczN1blVybWRUXzl4ZnQwWWhtekR3Q3VsR3FQNE80NzdqbW5GNzBXbmNRQ1RKM0FnWGYya25nRFZ4R21jdUJWWldELXlCa0wxVnZaVXVBR3Y3WXg4OXFaVm91UktkYkNzODNaWVQzczR3WFYyckE1RzNjOGw1ZXBpeE5EbTB6LUFLMV8xYXVPSkR2bGR0dmthT1JtVFNZZnI2S0wzREFSdjdoZDdOS3JSeWxMa1lhcmVfTk9kM3VNWUFtOEdLRk5GTEZrMXQ3bVBfeEhMVHU0VWluVXVuZ1VhV1pLbGgzOHAwaUx2bXdiUm9aUnVnUQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="local" data-title="actor accused of assault on domestic worker: theft allegation turns violent, maid files wrongful restraint ...">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Local Gazette (Kolkata)</span>
+            <span class="category-badge">Local</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Actor accused of assault on domestic worker: Theft allegation turns violent, maid files wrongful restraint ...</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Actor accused of assault on domestic worker: Theft allegation turns violent, maid files wrongful restraint ...'. This transition comes amid rapid innovation cycles and intense debate over security, privacy, and next-generation development frameworks. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary technology discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified ...</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMi9wFBVV95cUxPTmtBM1pCUHRKWXM1TTBLOC1zZFpYbDJod25GYV8xeFdzOHhrYjNHN2xPS2hoVkZQNnNXU19ldjdLR01Sa0JmOFg3RFdmb0Vrd3hzMnNxcFlPZnp5d2RJU2p2bVVWY2c0Ull4ZGNkdlplNG5ka1BMYUdsMmt6RnFDVkZRSmZ1aUkwZzdqVjVVVEJXSXVyV2ZyZGNPOHJHRldFaElCQVR4aExfNG9GbXFFb1BGM1VsOEU0UjdrVk5sdkRDR1BGNmJxak9vejBkM0E3M0NsU1RTdzhxSVRTb1lhUER3QTMtcEpnaFpPOXlXcTBxZXUzZGNj0gH8AUFVX3lxTFBiWFQ0MVV3dW94S0tGaF92X1lEZlQ5TjN3TnFOTk0wd2pJSFUzN1lrRnUtc2Y5SjR0TXhzTklHM3dMcWs5THoxVzZnUDJRaGNQcmJYb1g2bWFtandMQUxGS2xmZndidWlEMFZiSEpDWFBBN1JqX1NxTjBpazRpYzNWbTl6MnBlcHphSE5DRm9PZDhsX0pGakdqVzZ1bEpnYzZwUjA5SFNES3NrWnJMYVlPNkticlNCVm92RGxvRmZySGphSHpNd3Z5cTdBb19zNGc5bU9laTVHLXdZVURkUWM1dVJOd1NNb24tWGhYeW12b0FrRDNENXdoa0Zxaw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="economy" data-title="india, canada launch trade and investment forum to strengthen economic partnership">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Economy Desk</span>
+            <span class="category-badge">Economy</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">India, Canada launch trade and investment forum to strengthen economic partnership</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'India, Canada launch trade and investment forum to strengthen economic partnership'. This fiscal shift highlights key pressure points in global markets, including rising operational costs and inflation indicators. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary economy discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxQU0wwZ1ZIcWJXSkx0YjBjUGZjT3p2WWE3TUNnMllrNFpzTUtVYm5RZUJrMHVwNm9pbFJhd2lweUR4bHlQbWU1UXB4NFU5YW00TDFCQ2pPcVZDVHNTQ3NzdEY4YU5BQ0ljWGZ0dERXX1JRS18wVnl1ZEp5X3ZQY2lBMjFDMnk3WHhWZm94OHpnajZNRm4zd0pHTXpNU1RBZ1VlZmJLZXVCVjRzZDM0Vk55TzRXX1JuanQ3VzdQellZRkIyV1NKV1ZDRmcycEk3UXRuX0lkRWpDSdIB3gFBVV95cUxQVU1VT0V2QVNmYXd2X1ZfRWg1a0J2eHNmbWtIT0ZmUk8yNWl2aGFaTUdFY04xQ3hTS3ktN05jQkJZbkFwQnd1Vm1kSDJKR3IyREtMQm1nX0JXSFl5R29sbWR4U0RnQkQyTW1RNkg1bzFVUkJqRlFWbUNGQmVBRzZIY3JvZEVRQVQxREctejI5RTJUZFFmZlRkU0NjdUpRNzl0Sk5KdDAwdnZfaGM0c29aNlRCUTNVZUpsQTdaQnlJRVcxNmY4MEVxTUZObklFRFZEUEFOOFRicG5mbEprV0E?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="economy" data-title="india’s unemployed youth are the canaries of a troubled economy – the ‘cockroach commons’ know it">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Economy Desk</span>
+            <span class="category-badge">Economy</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">India’s Unemployed Youth Are the Canaries of a Troubled Economy – the ‘Cockroach Commons’ Know It</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'India’s Unemployed Youth Are the Canaries of a Troubled Economy – the ‘Cockroach Commons’ Know It'. This fiscal shift highlights key pressure points in global markets, including rising operational costs and inflation indicators. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary economy discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxOUE0yOWdQaGttb2VPdUNRYklpSkNTc1ViM1Fvbklmc2VBUXl0N2czLU5kTU9lMmZiTWwwOVhobUFFenNIZ01iSGNOTDl3VkMtUDd2NEFMdUdwelVvU2JqRFBEckNYRWY3Sk4zWXVqZkJlYWtEUHowaHV1bHE5ZTlGM2tyeHFoaGNaNm96ZXpIcmdDZ1hZdFM4N0QtSi00ZWZzY1dRb0VJWVdxTDllZmh5V3hZazRIU2JkbXVHOGhnMnNQZHZKQmxZ0gHQAUFVX3lxTFBLR1BYcTYzS1JXeFFwR05hMGlXdW1GUHNXWjU1V2dJbk0zRG9UemRfdlZBVUdQTFRaTlNIaFFOT1hRNWlHQk5PMTNEcW5Sa0dBYmhncW5FT3RwdVo2LVkwRTYxZEhFTTdUcWVMTFFrSHNMMW40Y19va0w3U0NNdnFxQWZHZzJiYmRiTkFaeV8zQ0FYV2Q5dHN1UWViWkRZVkhnUnk0YUtTbGJ3U3hka0NhYmV2MFRrTllnTWZyRlhsc1RGXzlva3lsSnFCWWQzZEQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="sports" data-title="keely hodgkinson ready for 'battle of world records' at london diamond league">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">World Desk</span>
+            <span class="category-badge">Sports</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">Keely Hodgkinson ready for 'battle of world records' at London Diamond League</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'Keely Hodgkinson ready for 'battle of world records' at London Diamond League'. This dramatic sporting event has energized fans and generated intense debate over team strategies and individual performance milestones. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary sports discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for full details.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE8tVHlKMXB0d0w0ckgyUkFOTVhYUW1qdUpRcG5pWkZrNXNsS0dKckFkVU9CQXB5cEJBYkxoZ1lsMmZqYkloUFU5VjhpMzNON0wxUVVHUDYteXoxbjJ0OFYxT1dscF9LREpD?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card" data-category="sports" data-title="from 5,000 followers to over a million: new zealand world cup player tim payne finds social media fame">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">World Desk</span>
+            <span class="category-badge">Sports</span>
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+        <h2 class="news-title">From 5,000 followers to over a million: New Zealand World Cup player Tim Payne finds social media fame</h2>
+        <p class="news-summary">In a major development reported by verified news desks, significant attention has centered on the announcement regarding 'From 5,000 followers to over a million: New Zealand World Cup player Tim Payne finds social media fame'. This dramatic sporting event has energized fans and generated intense debate over team strategies and individual performance milestones. Early stakeholder reactions suggest that this move could disrupt current operational models and necessitate immediate strategic pivots. Industry observers note that this represents a pivotal chapter in contemporary sports discussions, highlighting deep structural trends. As the situation continues to unfold rapidly, readers are advised to review the official verified source for fu...</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPamJleWNPSVp2NW1ORG14TzE4S181V1V1SGQ0WEtyTFJKSG44X3ZkNVI3X3JLSUFQY0FIZGVGcklZZUt2SUgzaTZkaW5XNnN2bDdfbmZXV3ZGcU82MGdMbDBVaVNOZEtzQUE2ZHBvNHQ1cV9Lbm9HcEJVYnZ2Nm1Jd2VLa25pa3o1UWJrTDlGODdpTDlWanVyUTY3eDBaZUlfcVU0aUxPaHk?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+    
+  </div>
+</div>
+
+<script>
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  // ----------------- C2 SUBSCRIBER CODE -----------------
+  // Listen for BroadcastChannel message or parent message event
+  window.addEventListener('message', function(event) {
+    const msg = event.data;
+    if (msg && (msg.channel === 'user-preference' || (msg.type === 'jet:publish' && msg.channel === 'user-preference'))) {
+      const rawToken = msg.data || msg.payload || msg.value;
+      console.log('Received broadcast token via postMessage:', rawToken);
+      applyPreferenceToken(rawToken);
+    }
+  });
+
+  // Listen for custom events on document
+  document.addEventListener('user-preference', function(event) {
+    console.log('Received broadcast token via CustomEvent:', event.detail);
+    applyPreferenceToken(event.detail);
+  });
+
+  function applyPreferenceToken(token) {
+    if (!token) return;
+    
+    // Clear custom active tabs styling
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // If it corresponds to a built-in category, activate that tab!
+    const matchingTab = document.querySelector(`.tab-btn[data-category="${token.toLowerCase()}"]`);
+    if (matchingTab) {
+      matchingTab.classList.add('active');
+      activeCategory = token.toLowerCase();
+      searchQuery = ''; // Clear search
+      document.getElementById('search-input').value = '';
+    } else if (token.toLowerCase() === 'all') {
+      const allTab = document.querySelector('.tab-btn[data-category="all"]');
+      if (allTab) allTab.classList.add('active');
+      activeCategory = 'all';
+      searchQuery = '';
+      document.getElementById('search-input').value = '';
+    } else {
+      // It's a custom token (e.g. "fintech" or "#fintech")
+      // Treat it as a query search and show matches dynamically!
+      let displayToken = token;
+      if (displayToken.startsWith('#')) {
+        displayToken = displayToken.substring(1);
+      }
+      activeCategory = 'all'; // Search across all categories
+      searchQuery = displayToken;
+      document.getElementById('search-input').value = '#' + displayToken;
+    }
+    
+    // Trigger filtering!
+    filterCards();
+  }
+  // ------------------------------------------------------
+
+  // Setup click triggers on cards for expanding details
+  function initCardListeners() {
+    document.querySelectorAll('.news-card').forEach(card => {
+      // Toggle expanded class
+      card.addEventListener('click', () => {
+        card.classList.toggle('expanded');
+        const btnText = card.querySelector('.expand-btn span');
+        if (card.classList.contains('expanded')) {
+          btnText.textContent = 'Collapse Despatch';
+        } else {
+          btnText.textContent = 'Expand Despatch';
+        }
+      });
+    });
+  }
+
+  // Filter headlines based on category tab & search box
+  function filterCards() {
+    let visibleCount = 0;
+    document.querySelectorAll('.news-card').forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      const cardTitle = card.getAttribute('data-title');
+      
+      const matchesCategory = (activeCategory === 'all' || cardCategory === activeCategory);
+      const matchesSearch = (!searchQuery || cardTitle.includes(searchQuery.toLowerCase()));
+      
+      if (matchesCategory && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Handle empty grid
+    let emptyMsg = document.getElementById('empty-search-msg');
+    if (visibleCount === 0) {
+      if (!emptyMsg) {
+        emptyMsg = document.createElement('div');
+        emptyMsg.id = 'empty-search-msg';
+        emptyMsg.className = 'empty-state';
+        emptyMsg.textContent = 'No matching despatches found.';
+        document.getElementById('news-grid').appendChild(emptyMsg);
+      }
+      emptyMsg.style.display = 'block';
+    } else if (emptyMsg) {
+      emptyMsg.style.display = 'none';
+    }
+  }
+
+  // Category Selector Handling
+  document.getElementById('category-tabs').addEventListener('click', (e) => {
+    if (e.target.classList.contains('tab-btn')) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      activeCategory = e.target.getAttribute('data-category');
+      filterCards();
+    }
+  });
+
+  // Search input handling
+  document.getElementById('search-input').addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    filterCards();
+  });
+
+  // Initial bindings
+  initCardListeners();
+
+  // JETRO Dynamic Live Refresh Binding Event Listener!
+  document.addEventListener('jet:refresh', function(event) {
+    console.log('Received fresh canvas event:', event.detail);
+    const data = event.detail;
+    if (!data) return;
+
+    if (data.last_updated) {
+      document.getElementById('last-update').textContent = data.last_updated;
+    }
+
+    if (data.articles && data.articles.length > 0) {
+      const grid = document.getElementById('news-grid');
+      grid.innerHTML = ''; // clear grid
+
+      data.articles.forEach(article => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.setAttribute('data-category', article.category.toLowerCase());
+        card.setAttribute('data-title', article.title.toLowerCase());
+        
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-meta">
+              <span class="source-badge">${article.source}</span>
+              <span class="category-badge">${article.category}</span>
+            </div>
+            <div class="sentiment-indicator sentiment-${article.sentiment.toLowerCase()}" title="Sentiment: ${article.sentiment}"></div>
+          </div>
+          <h2 class="news-title">${article.title}</h2>
+          <p class="news-summary">${article.summary}</p>\n          <div class="card-footer">
+            <a href="${article.url}" target="_blank" class="read-more" onclick="event.stopPropagation();">
+              Read original source »
+            </a>
+            <button class="expand-btn">
+              <span>Expand Despatch</span>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Re-init events and apply active filters
+      initCardListeners();
+      filterCards();
+    }
+  });
+</script>
+
+</body>
+</html>

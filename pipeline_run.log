@@ -1,0 +1,78 @@
+============================================== 
+Starting SmartNews Pipeline at 29-05-2026 11:59:51.48 
+============================================== 
+==============================================
+      SMARTNEWS LIVING CANVAS PIPELINE        
+==============================================
+Running in OFFLINE mode (using rule-based summarizer).
+GEMINI_API_KEY not found in environment. Falling back to rule-based summarization.
+
+--- Phase 1: News Scraping ---
+Scraping The Hindu via verified RSS...
+Successfully scraped 5 genuine articles from The Hindu
+Scraping Hindustan Times via verified RSS...
+Successfully scraped 5 genuine articles from Hindustan Times
+Scraping Times of India via verified RSS...
+Successfully scraped 5 genuine articles from Times of India
+Scraping Reuters via verified RSS...
+Successfully scraped 5 genuine articles from Reuters
+Scraping Bloomberg via verified RSS...
+Successfully scraped 5 genuine articles from Bloomberg
+Resolving location via ipapi.co...
+Resolving location via ip-api.com...
+Resolved user local region: Kolkata, India
+Scraping local despatches from https://news.google.com/rss/search?q=Kolkata%20local%20news&hl=en-IN&gl=IN&ceid=IN:en...
+Successfully scraped 5 local despatches
+
+Topic representation scan: {'Local', 'Politics', 'General', 'Sports', 'Technology', 'Science'}
+Core category 'Economy' is not represented. Fetching targeted stories...
+Scraping category-specific news for topic: economy...
+Successfully scraped 2 articles for topic: economy
+Core category 'World' is not represented. Fetching targeted stories...
+Scraping category-specific news for topic: world...
+Successfully scraped 2 articles for topic: world
+
+--- Phase 2: AI Summarization & Categorization ---
+[1/34] Processing: 'Delhi HC refuses to immediately restore Cockroach Janta Party’s X account in India' (The Hindu)
+[2/34] Processing: 'Internal bickering, resignations and public anger, Trinamool battling on multiple fronts' (The Hindu)
+[3/34] Processing: 'Fishermen seek infrastructure, training to revive tuna fishing harbour in Tiruvottiyur' (The Hindu)
+[4/34] Processing: 'Kerala private bus industry ignored in policy address, say operators' (The Hindu)
+[5/34] Processing: 'SC sets three-month deadline on High Courts to pronounce judgment in a case' (The Hindu)
+[6/34] Processing: 'SC introduces nationwide judicial timelines to tackle delays in high courts' (Hindustan Times)
+[7/34] Processing: 'Punjab civic body results: AAP shines, Congress trailing behind, BJP falters | Top points' (Hindustan Times)
+[8/34] Processing: 'Setback for Cockroach Janta Party, Delhi HC refuses to immediately restore X account as content 'slightly offensive'' (Hindustan Times)
+[9/34] Processing: 'Delhi gets respite from heat as rain, strong winds lash parts of city; IMD issues Orange alert' (Hindustan Times)
+[10/34] Processing: 'Satellite imagery shows massive cloud belt over north, central India; Delhi braces for more rain' (Hindustan Times)
+[11/34] Processing: 'Meet Shrey Parikh: 14-year-old Indian-origin Spelling Bee winner who spelled 32 words in 90 seconds' (Times of India)
+[12/34] Processing: 'Meet Antoine Moses: Canadian ‘tree lover’ sets a second Guinness World Record by planting 47,460 trees in just 24 hours on the Kenyan coast' (Times of India)
+[13/34] Processing: 'A 2,000-year-old stone found in Karnak temple reveals a Roman emperor hidden in the form of an Egyptian pharaoh' (Times of India)
+[14/34] Processing: 'Italy on red alert as France, Portugal beat hottest May day record' (Times of India)
+[15/34] Processing: 'Why ‘Looksmaxxing’ streamer Androgenic got kicked off a Jetstar flight despite claiming medical clearance?' (Times of India)
+[16/34] Processing: 'US-Iran MOU on 60-day ceasefire extension reached, but Trump must approve, sources say' (Reuters)
+[17/34] Processing: 'US probes Reid Hoffman group over funding lawsuits against Trump, source says' (Reuters)
+[18/34] Processing: 'Groq raising up to $650 million from existing investors, source says' (Reuters)
+[19/34] Processing: 'Exclusive: China works on AI token futures market, sources say, in race with US' (Reuters)
+[20/34] Processing: 'Exclusive: ByteDance developing custom CPU chips to support AI rollout, sources say' (Reuters)
+[21/34] Processing: 'US, Iran Agree to 60-Day Truce Renewal Pending Trump Signoff' (Bloomberg)
+[22/34] Processing: 'FHLBs Remain a Dependable Source of Funding: Ryan Donovan' (Bloomberg)
+[23/34] Processing: 'Anthropic Eclipses OpenAI With Valuation of $965 Billion' (Bloomberg)
+[24/34] Processing: 'Oil Spikes as Renewed Gulf Attacks Threaten Fragile Ceasefire' (Bloomberg)
+[25/34] Processing: 'China AI Upstart MiniMax Doubles Sales Ahead of New Model Launch' (Bloomberg)
+[26/34] Processing: 'Political clashes rock Kolkata neighbourhoods' (Local Gazette (Kolkata))
+[27/34] Processing: 'Kolkata Police: Approximately 300 voter, Aadhaar cards found at TMC office in Tangra' (Local Gazette (Kolkata))
+[28/34] Processing: 'Kolkata’s Eid prayers held at iconic Brigade Parade Ground, not Red Road, after decades' (Local Gazette (Kolkata))
+[29/34] Processing: 'Id prayers shifted to Brigade Ground in Kolkata as Bengal govt. imposes fresh curbs on Bakrid celebrations' (Local Gazette (Kolkata))
+[30/34] Processing: 'Actor accused of assault on domestic worker: Theft allegation turns violent, maid files wrongful restraint ...' (Local Gazette (Kolkata))
+[31/34] Processing: 'India, Canada launch trade and investment forum to strengthen economic partnership' (Economy Desk)
+[32/34] Processing: 'India’s Unemployed Youth Are the Canaries of a Troubled Economy – the ‘Cockroach Commons’ Know It' (Economy Desk)
+[33/34] Processing: 'Keely Hodgkinson ready for 'battle of world records' at London Diamond League' (World Desk)
+[34/34] Processing: 'From 5,000 followers to over a million: New Zealand World Cup player Tim Payne finds social media fame' (World Desk)
+
+--- Phase 3: Canvas Rendering ---
+Rendered newsletter HTML to d:\SmartNewspaper\.jetro\frames\newsletter_rendered.html
+Successfully saved structured JSON data to d:\SmartNewspaper\newsletter_data.json
+
+Pipeline execution completed successfully!
+Ready to update the Jetro Canvas frame.
+Pipeline execution finished at 29-05-2026 12:00:24.63 
+---------------------------------------------- 

@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+ENV/
+env/
+
+# Environments
+.env
+.env.local
+
+# Project data caches
+*.json
+!metadata.json
+!plugin.json
+!manifest.json
