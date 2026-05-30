@@ -233,7 +233,26 @@
       text-transform: uppercase;
     }
 
+    .front-page-badge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-burgundy);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(127, 29, 29, 0.08);
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-left: 4px;
+    }
+
+    .news-card.front-page-card {
+      border-left: 3px solid var(--accent-burgundy);
+      padding-left: 12px;
+    }
+
     .category-badge {
+
       font-family: var(--font-serif);
       font-size: 0.7rem;
       font-weight: 700;
@@ -438,15 +457,12 @@
   <div class="controls">
     <div class="tabs" id="category-tabs">
       <button class="tab-btn active" data-category="all">All News</button>
-      <button class="tab-btn" data-category="technology">Technology</button>
-      <button class="tab-btn" data-category="economy">Economy</button>
-      <button class="tab-btn" data-category="politics">Politics</button>
-      <button class="tab-btn" data-category="world">World</button>
-      <button class="tab-btn" data-category="science">Science</button>
-      <button class="tab-btn" data-category="sports">Sports</button>
-      <button class="tab-btn" data-category="general">General</button>
-      <button class="tab-btn" data-category="local">Metro Gazette</button>
+      <button class="tab-btn" data-category="macro & markets">Macro & Markets</button>
+      <button class="tab-btn" data-category="strategy & m&a">Strategy & M&A</button>
+      <button class="tab-btn" data-category="venture & disruption">Venture & Disruption</button>
+      <button class="tab-btn" data-category="leadership & governance">Leadership & Governance</button>
     </div>
+
 
     <div class="search-box">
       <input type="text" id="search-input" class="search-input" placeholder="Search despatches...">
@@ -456,14 +472,18 @@
   <div class="news-grid" id="news-grid">
     {% if articles %}
       {% for article in articles %}
-      <div class="news-card" data-category="{{ article.category|lower }}" data-title="{{ article.title|lower }}">
+      <div class="news-card {% if article.front_page %}front-page-card{% endif %}" data-category="{{ article.category|lower }}" data-title="{{ article.title|lower }}">
         <div class="card-header">
           <div class="card-meta">
             <span class="source-badge">{{ article.source }}</span>
             <span class="category-badge">{{ article.category }}</span>
+            {% if article.front_page %}
+              <span class="front-page-badge">★ Front Page Despatch</span>
+            {% endif %}
           </div>
           <div class="sentiment-indicator sentiment-{{ article.sentiment|lower }}" title="Sentiment: {{ article.sentiment }}"></div>
         </div>
+
         <h2 class="news-title">{{ article.title }}</h2>
         <p class="news-summary">{{ article.summary }}</p>
         <div class="card-footer">
@@ -626,7 +646,7 @@
 
       data.articles.forEach(article => {
         const card = document.createElement('div');
-        card.className = 'news-card';
+        card.className = 'news-card' + (article.front_page ? ' front-page-card' : '');
         card.setAttribute('data-category', article.category.toLowerCase());
         card.setAttribute('data-title', article.title.toLowerCase());
         
@@ -635,11 +655,13 @@
             <div class="card-meta">
               <span class="source-badge">${article.source}</span>
               <span class="category-badge">${article.category}</span>
+              ${article.front_page ? '<span class="front-page-badge">★ Front Page Despatch</span>' : ''}
             </div>
             <div class="sentiment-indicator sentiment-${article.sentiment.toLowerCase()}" title="Sentiment: ${article.sentiment}"></div>
           </div>
           <h2 class="news-title">${article.title}</h2>
-          <p class="news-summary">${article.summary}</p>\n          <div class="card-footer">
+          <p class="news-summary">${article.summary}</p>
+          <div class="card-footer">
             <a href="${article.url}" target="_blank" class="read-more" onclick="event.stopPropagation();">
               Read original source »
             </a>

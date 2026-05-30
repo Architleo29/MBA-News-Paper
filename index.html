@@ -233,7 +233,26 @@
       text-transform: uppercase;
     }
 
+    .front-page-badge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-burgundy);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(127, 29, 29, 0.08);
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-left: 4px;
+    }
+
+    .news-card.front-page-card {
+      border-left: 3px solid var(--accent-burgundy);
+      padding-left: 12px;
+    }
+
     .category-badge {
+
       font-family: var(--font-serif);
       font-size: 0.7rem;
       font-weight: 700;
@@ -431,22 +450,19 @@
         <div class="live-dot"></div>
         <span>Live Despatch</span>
       </div>
-      <span>Updated: <span id="last-update" class="time-badge">2026-05-30 10:55:30</span></span>
+      <span>Updated: <span id="last-update" class="time-badge">2026-05-30 11:18:49</span></span>
     </div>
   </header>
 
   <div class="controls">
     <div class="tabs" id="category-tabs">
       <button class="tab-btn active" data-category="all">All News</button>
-      <button class="tab-btn" data-category="technology">Technology</button>
-      <button class="tab-btn" data-category="economy">Economy</button>
-      <button class="tab-btn" data-category="politics">Politics</button>
-      <button class="tab-btn" data-category="world">World</button>
-      <button class="tab-btn" data-category="science">Science</button>
-      <button class="tab-btn" data-category="sports">Sports</button>
-      <button class="tab-btn" data-category="general">General</button>
-      <button class="tab-btn" data-category="local">Metro Gazette</button>
+      <button class="tab-btn" data-category="macro & markets">Macro & Markets</button>
+      <button class="tab-btn" data-category="strategy & m&a">Strategy & M&A</button>
+      <button class="tab-btn" data-category="venture & disruption">Venture & Disruption</button>
+      <button class="tab-btn" data-category="leadership & governance">Leadership & Governance</button>
     </div>
+
 
     <div class="search-box">
       <input type="text" id="search-input" class="search-input" placeholder="Search despatches...">
@@ -456,38 +472,22 @@
   <div class="news-grid" id="news-grid">
     
       
-      <div class="news-card" data-category="economy" data-title="wto chief urges china to shift on trade surplus | hindustan times">
+      <div class="news-card front-page-card" data-category="strategy & m&a" data-title="universal music declines takeover offer from bill ackman’s pershing square">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Hindustan Times</span>
-            <span class="category-badge">Economy</span>
-          </div>
-          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
-        </div>
-        <h2 class="news-title">WTO chief urges China to shift on trade surplus | Hindustan Times</h2>
-        <p class="news-summary">BEIJING — The head of the World Trade Organization on Friday urged China to change its growth model, arguing that its soaring trade surplus was ultimately unsustainable and risked sparking new trade barriers. Beijing says it wants to support the multilateral trading system, "because it has benefited quite a bit from it", WTO chief Ngozi Okonjo-Iweala told the Munich Security Conference. However, "the export-led growth model that drove China's growth for the past 40 years cannot drive China's growth for the next 40," said Okonjo-Iweala. "And the $1.2 trillion trade surplus is not sustainable. Because the rest of the world cannot absorb it," she added.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQZERNWFVxRElKc0hPSTlvdVBFSC1UU1BrcnowbXM5YWc1c2VzNHlnNG9KY1UtQlk2S0p2NWZhUTJLT3FGXzNnY0YtRXF3MUxobmlTQmVfSGRXb29BdUllMVBtNTZVYmxWb3huTzMwSTh2VHB0ckh2SkhjVy1jekJleWRYTHhqbHVYM1phVHV1Qm42X2dmTHF3VlZVSDJ3enBSaUZHb0Y4dVROc2tPS3NSVFhMblNTQjk1VHfSAb8BQVVfeXFMTmxtbGhTTk1hZ2pkdUxIdlZHZmhBS19MV01GQ3ZXYWdsRWl3Zk50R0M5bGlYdGxzSDFGTEF6aXNjM2RaOFBfUGh3emFqbGw3QWZnNGRzLUpCYjQyLTRXRTJnQm5Oc3YxcnBReUxhQWJMUm10ZWtBOF9FUzBZZnFoZnRxN3dRQ2hQSFU2dFQtUzZoVTZMT19vak0zekZia1F3ek1tTU54a091Qmk4R0RMcmRXVkFISl9BSlpKNHZiWm8?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="economy" data-title="'wouldn't be in business today without india': why germany is 'desperate' for millions of indians to save">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Times of India</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">Financial Times</span>
+            <span class="category-badge">Strategy & M&A</span>
+            
+              <span class="front-page-badge">★ Front Page Despatch</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">'Wouldn't be in business today without India': Why Germany is 'desperate' for millions of Indians to save</h2>
-        <p class="news-summary">BERLIN — At TOI World Desk, our dedicated team of seasoned journalists and passionate writers tirelessly sifts through the vast tapestry of global events to bring you the latest news and diverse perspectives round the clock. With an unwavering commitment to accuracy, depth, and timeliness, we strive to keep you informed about the ever-evolving world, delivering a nuanced understanding of international affairs to our readers. While some observers express optimism, others caution that long-term viability remains unproven. Experts agree that this milestone will serve as a reference point for future studies in the field. The coming weeks will likely provide greater clarity as additional details are made public.</p>
+
+        <h2 class="news-title">Universal Music declines takeover offer from Bill Ackman’s Pershing Square</h2>
+        <p class="news-summary">WASHINGTON — A significant corporate development was reported as verified briefs detail shifts regarding 'Universal Music declines takeover offer from Bill Ackman’s Pershing Square'. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMilAJBVV95cUxQZDRmSmZkZ0JlQWM4VG5veHBsWEdGNjVqRmlGTDlfNjM0SWo2Z05SX1VuM3NDT1N2cC1RTVhNaXJPZnl5NFZWR3ViZ2VCeGp0Q2RKSGttNmRKdTVPMXFQQ3VURzA4U3IzV2pJTjQwTmRrU1B3YjJoOUFMcmpIbTVwNXByWlZidHNaVHcyZFV3MkJDNW91UEVSdG9fMW5ydC1reEI1WW0wNUNoZ1Y4TmQ5LTlQanBURFhLQURudmFoRlJoS0tsM05iSjdzSWhvTHpQRHdpbDJqZk5VcUwwMC1iMGFCeE5VVlQ1VFdOTkNYSlZTNC1BZ3dDd01Pd3VUWXNSVHlkWVFCeERrY0c2QklNRzB0VFDSAZoCQVVfeXFMTWptXzFLTjUxY3NKamNpTUNsZ1ZGT0VDVTVfRndmMC1BSUVfRlZoY1ZDM283VmFubU1FR2pUUHhTU3YycDZiNFk3LUF0QlZLTC03VWZQRklTN1dWQzhTMjVLeWZ6SDEyc29xc0w2RlBZcUtaYVlnTFFheFFZWWIyTkRRQlRQMGxsQXNWdlQ0RV9Zd3N6dW5lTXRPYlB5MC1DaUttU0VBWUtJcDc2S2lqVVdNMElqcjJsLVU1Mml6bGctRmwxbTFJWWZZNnVHU09yQXloemI5TmZtTVF5ZkZmblExUVJuUkpaM2llNUI5N0poMi1pOTlYMmNFajMwQzFlWFJDQkJVajNtdzhfRWp1UkhramtXc1lzcjN3?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOVGtQbnNhVmNrb2xPTkV2V2hsdkdnUGphcXF6NWdaYWhhVVQ2U3VIQXdSYU05SE0zSHo3N09EOWpHZUtUMTE1LUZxeEJQTXVHb0FlcUpEbHkzWGtpQm1lVWNUWlFnUEN2cVhNeHd4bjBxeXEwenhQcmFKVHlCaEtkNnp3Zms?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -496,18 +496,22 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="economy" data-title="ecb policymakers see first of several rate hikes in june, sources say">
+      <div class="news-card front-page-card" data-category="strategy & m&a" data-title="universal music group declines bill ackman takeover proposal">
         <div class="card-header">
           <div class="card-meta">
             <span class="source-badge">Reuters</span>
-            <span class="category-badge">Economy</span>
+            <span class="category-badge">Strategy & M&A</span>
+            
+              <span class="front-page-badge">★ Front Page Despatch</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">ECB policymakers see first of several rate hikes in June, sources say</h2>
-        <p class="news-summary">LONDON — Chief strategists at Reuters have highlighted key regulatory parameters regarding 'ECB policymakers see first of several rate hikes in June, sources say'. Strategic stakeholders are preparing for structural adjustments as market indicators point to volatility. While some observers express optimism, others caution that long-term viability remains unproven. Experts agree that this milestone will serve as a reference point for future studies in the field. The coming weeks will likely provide greater clarity as additional details are made public.</p>
+
+        <h2 class="news-title">Universal Music Group declines Bill Ackman takeover proposal</h2>
+        <p class="news-summary">GENEVA — A significant corporate development was reported as verified briefs detail shifts regarding 'Universal Music Group declines Bill Ackman takeover proposal'. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPVXNka0pqY3Q2RHhCZnN3WnB0SXYtbzVEWXR5cnFvRVNJRGY1MkFZMFA1M0VIemJpTENGaXB1b1NvazYzc2p2MWdmSkpTc0pxVG8xSGxwbEJiWTh5NjhCVDNER3I3dmVyeWRSWWZ4THFsUkl5a0YwdzZCMTc0SndBNEtwcTdqZ2kxa3VYbmIwQjFpN0tmSnUyUGhmR3R4UVlIaWwyNGVRcVEwcFN4MGlibWhVZUJQUQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxQTVBRSFRLUkJUa0diYU5UTlJKN3RvQXp0V1cwNzJTbzNwVVVIWXlGMWxoNnRyZ01SNDE2amUwRnlWOHFaWlBaRDM1R3lSY2k4NjgzX0tEOW9IQndYT2UtaG9GVjEydlRiOVMwYmVsMlpBRE1Jc2VSZWY4V0habkpIVExlQllrQUZhZ2pxZ1drdDk0T2JsdldMaXdCbU1iYkY2dHpKZnhxYnhiTlgwM1ZhYkpqcFI?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -516,18 +520,22 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="general" data-title="industrials sector & industry performance">
+      <div class="news-card front-page-card" data-category="venture & disruption" data-title="ai coding startup cognition raises $1 billion at $26 billion value">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Bloomberg</span>
-            <span class="category-badge">General</span>
+            <span class="source-badge">Bloomberg.com</span>
+            <span class="category-badge">Venture & Disruption</span>
+            
+              <span class="front-page-badge">★ Front Page Despatch</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">Industrials Sector & Industry Performance</h2>
-        <p class="news-summary">SINGAPORE — Analysis published by Bloomberg sheds new light on the underlying factors driving 'Industrials Sector & Industry Performance'. This development has emerged as a key talking point among industry analysts monitoring the situation. Operational managers are already formulating transition protocols to minimize service interruptions. Industry observers note that this represents a pivotal chapter in contemporary general discussions. Further official statements are expected shortly to clarify the remaining ambiguities.</p>
+
+        <h2 class="news-title">AI Coding Startup Cognition Raises $1 Billion at $26 Billion Value</h2>
+        <p class="news-summary">LONDON — A significant corporate development was reported as verified briefs detail shifts regarding 'AI Coding Startup Cognition Raises $1 Billion at $26 Billion Value'. The capital allocation signals shifting sentiment in early-stage investment and represents a notable push toward scaling next-generation enterprise capabilities.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTE1BR3dSV21neEpjUWY1VnIzVUVtZDFoRExhamR1bE94NnhUR3hoWUY5YlZlZWNGVDIxUmQ0clpRTXdlSkRESEFZdUJZMERtY1A2LUgtdUF5bjNDaGJaZjMtWFlTQQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQcm9aMFdXbk1qSlBTWmt6SWRuV25iaVU2RG5BbnFFT1BpMktXUEk2N1hVYXo1TldHSS1lYmhncWx4WTBfaTNvQUZNRjBIeGNWVXUyamFuTW5TX3owT19fcUxxYkdoaC1TVUF4Y1ZWTTFLVjNScDlVcGZOcFFWZnFUTG9JeDVPMUV2TTF4T0pUVVhBeVd3ZzlQVC0tMDBibzVkT24yVEdrdERfTy1IYzktdVFXVWxPZw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -536,18 +544,22 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="local" data-title="delhi airport becomes first indian infrastructure facility to host ‘skycast’ aviation weather intelligence system">
+      <div class="news-card front-page-card" data-category="venture & disruption" data-title="ai coding startup cognition raises $1b at $25b pre-money valuation">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Metro Gazette (Delhi)</span>
-            <span class="category-badge">Local</span>
+            <span class="source-badge">TechCrunch</span>
+            <span class="category-badge">Venture & Disruption</span>
+            
+              <span class="front-page-badge">★ Front Page Despatch</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
         </div>
-        <h2 class="news-title">Delhi Airport becomes first Indian infrastructure facility to host ‘Skycast’ aviation weather intelligence system</h2>
-        <p class="news-summary">DELHI — Indira Gandhi International Airport has become the first infrastructure facility in the country to install an integrated aviation weather intelligence system called ‘Skycast’. Accordingly, the system was launched by Delhi International Airport Limited (DIAL) in collaboration with the Ministry of Science and Technology on Friday. It is aimed at strengthening aviation safety and improving real-time weather monitoring for airport and flight operations. According to DIAL, the system integrates multiple atmospheric monitoring and remote sensing technologies, including Radar Wind Profiler (RWP), Microwave Profiling Radiometer (MPR), SODAR (Sonic Detection and Ranging) and Automated Weather Stations (AWS). The platform enables continuou...</p>
+
+        <h2 class="news-title">AI coding startup Cognition raises $1B at $25B pre-money valuation</h2>
+        <p class="news-summary">LONDON — Cognition, the makers of the autonomous AI software engineer named Devin, has raised more than $1 billion at a $25 billion pre-money valuation ($26 billion post money), the company announced on Wednesday. Last year, all signs pointed to model makers swallowing this hot market themselves.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxPMlVwQ3hFRXNsejRRQVlzc2w0dzhDRkt4QkdmT2JFcVB6VzhXSVl5OGo5V1RKcnV1TDBHb2JWcG16eDhtUGotVDlaOENkdGR4cE8wMVUzdE0wZ1JreHowOU5faTRKRGRoYV9xR2xxUnRpcFgzdnl1RzhBRzBpc3VoRzF5MERkYWNyY0NXUGRVajBkMXFWT0xXMzB2bmxJeTE3cW1XLWJxNEVMM1cxd3owbFJTZGxnS0s2RkUzSWlFU09jcU5oeXpycENYTU9YQW9USUxad3ZocUNndzQzS01n0gHmAUFVX3lxTFBXOXoxVFlrczJ1TkRfZWhLLUNRN2xlZ1o1WVhDNEV4YTBYX0hxTC1PX2pIUk5IWTUzcW5lVVJZeVpqUV8tcWxmejRxNWYwN3ZOa1ZEdW8yel82aUNHYUJqeEdzVmI3VkpOMER4b2NpMFpERkE1bFZLdXFzcXFPbXc1SDRqcjZkbHluaS1XNk0waTktTHZ5M0tSVGVpb0pVSHB5ZVo2UkRZTktRd3JrTURFTEJlVnI2cTBQeVR4SkNrVlhWYXBkSWdBWjBuZjlwV0VHOHQ5cGxEcmJFckhJN3pjQXVsakNB?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOQzd0YXo5MWwzZmhuUkxZWktSZFBQdnVNRVBJaGlUQlJnUng3d0dPaF9FWUF6RGVDR0ZNWVdfRlA2YlhLbWVydlhsRmpqS21zb2hKYVgxbjNoOHZFUEhMQVFVZ3RnTDZ2SWpYYXRMQUotaF9OQmhKRHB0bk44NjFRZm8wV0tPSzZJMDg4clZTbUdjajBVbk5UdXNfN2Eza1BD?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -556,158 +568,20 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="local" data-title="india–finland business meeting held in mumbai to boost economic cooperation">
+      <div class="news-card " data-category="macro & markets" data-title="fed governor michelle bowman warns against hiking interest rates because of inflation spike">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Metro Gazette (Mumbai)</span>
-            <span class="category-badge">Local</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">India–Finland Business Meeting Held in Mumbai to Boost Economic Cooperation</h2>
-        <p class="news-summary">MUMBAI — India-Finland business meeting held in Mumbai today, bringing together industry leaders and policymakers from both countries to explore avenues for deeper economic cooperation. The meeting featured an engaging chat with Finland President Alexander Stubb, who spoke on a wide range of global issues. During the interaction, the Finnish President reflected on the evolving geopolitical landscape, including the ongoing situation in the Middle East and the changing dynamics of global trade. Industry observers note that this represents a pivotal chapter in contemporary economy discussions. Further official statements are expected shortly to clarify the remaining ambiguities.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNak5WTnM0QmZYeXFGcllUWFJ4LW4wb3p4UVc3eG4tLUpHSTBabEpLTDVqTVdIamgyM1h5VHZUUGdnM0xDWllqUkl4ajQ4bGVDOEVrWjdYZHhUVUc5VUhLVG1rRmF5OS1EUmQ4S1BORnZzeVZ2TFdUcnY1QWJSZWkzTThZUVBxTk5fNkZnM1BoNXk1Uzc4dnFtZjd4NjN6MHZnYzg4?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="local" data-title="8th global bengal business summit inaugurated in kolkata">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Metro Gazette (Kolkata)</span>
-            <span class="category-badge">Local</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">8th Global Bengal Business Summit inaugurated in Kolkata</h2>
-        <p class="news-summary">KOLKATA — A critical shift is unfolding as dispatches from Metro Gazette (Kolkata) signal key structural changes regarding '8th Global Bengal Business Summit inaugurated in Kolkata'. This fiscal shift highlights key pressure points in global markets, including rising operational overheads. Immediate market responses have been mixed, reflecting a cautious wait-and-see approach. The situation serves as a clear illustration of how rapidly the economy landscape is transforming. A comprehensive press briefing is scheduled next week to outline the subsequent roadmap.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxOZlh0aDAteWtRTlhwaGpGOVZQc2VXWEl3VnFsdDJJcWJKbDd6VWFYN2dIbFR1UDdvZmFMYlF2N3dadllLWDRCd3dQSWY4NGJxZnFTWFpoSThxU2Jyd2hxSTZzY3JJdXJMR3poX2dCbnltaV9DUGFOTnhUeFRYRjc4bEdiYzlXd0tOTXc?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="local" data-title="today petrol, diesel prices may 30: fuel prices steady? check petrol, diesel rates in delhi, mumbai, chennai,">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Metro Gazette (Chennai)</span>
-            <span class="category-badge">Local</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">Today Petrol, Diesel Prices May 30: Fuel prices steady? Check Petrol, Diesel rates in Delhi, Mumbai, Chennai,</h2>
-        <p class="news-summary">CHENNAI — Public debates concerning 'Today Petrol, Diesel Prices May 30: Fuel prices steady? Check Petrol, Diesel rates in Delhi, Mumbai, Chennai,' have reached a critical inflection point, according to Metro Gazette (Chennai) coverage. Public interest is surging as diverse viewpoints continue to clash over the immediate consequences. While some observers express optimism, others caution that long-term viability remains unproven. Experts agree that this milestone will serve as a reference point for future studies in the field. The coming weeks will likely provide greater clarity as additional details are made public.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMixAJBVV95cUxOczA0YXhzN1A4dXhUZGV0RlNyTVM2NFVmcFM4dUhSaGxtUW94cUpYWC01YXVhRGtYNV9aLW1tREU2NVMySDJkSzljY0dsWmwyUE9pcG5BZGJxbi10dnBpZTV0SDlGYlJsTzdTMmY4ZVhna0FnYjlpZjNDOVpLT3ZQLThGVmZ4SDk2SkFIUmFIXy1rb0FSN1h1UHpkeTZMQk80TGdSNnl4aUlMMXVhQVJkdTBrSmlYRTJaVE5JWXYzM0FILUpKOW95dmc2b0dfWXczVEZMb1dhN1p4cUNiOEI3cVVvUzZieE1IeHdZbWNaMlZwTHNLbEJiSHgxTHZxMXpGRl9TQ01obzZqaFl6RE81MFB5UUc0dHhQdEdwNFN2cDVNQndxVW5acGNpTFRhUE9mOUsyY1EzVmtYMElkVDZJVTFsc2zSAcoCQVVfeXFMTXdMY0gxaWhOZm5rb0lmUkc0bVNwMGpqRmlCY0hhN2hhWm1JVTgzY2Jub3BvblNMdVdnV1lwdWxndVhlTG1BeFg4eVZQSVdzX053bzVkeXVJNDFmb2J3eGt6QXd1Y0hLVkpTNnZFSVptNTRSVkgwTW5qRzhScTM1dnYxSXl2UkZVZmNDUEFjTU4ySHZLN0tueXk4SnRpRklVYk1uZG9lajRUNWxVQzN6SlROMmlQX3I0aW9aUHNkN2RCeGZDTjhmbVlUdFc5emZQR0NSaW1nSG9pN2JQOVhCQllZNmVCaGFpaHJydnBibzBSeWZTZFE1RzhtTTk4akVicEpBSFJOS0RaTW9UeXl1bTRPUEkxSzNmMGs4RFRibTdDeFZzRW1hendPbElxYk1DSExIbDA5eWQ1S3d4empZdUg2YU9PaDRlVnFB?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="local" data-title="bengaluru built the gcc story, but hyderabad is scaling fast">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Metro Gazette (Bengaluru)</span>
-            <span class="category-badge">Local</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">Bengaluru Built the GCC Story, but Hyderabad is Scaling Fast</h2>
-        <p class="news-summary">BENGALURU — An official statement published by Metro Gazette (Bengaluru) outlines dramatic strategic adjustments regarding 'Bengaluru Built the GCC Story, but Hyderabad is Scaling Fast'. Stakeholders are keeping a close watch on subsequent updates to formulate their responsive plans. Immediate market responses have been mixed, reflecting a cautious wait-and-see approach. The situation serves as a clear illustration of how rapidly the general landscape is transforming. A comprehensive press briefing is scheduled next week to outline the subsequent roadmap.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQZGZiVFlXV2NFU3hfYW4xaE94WTh5cnJGVHZYNGE1RkRQZENKYUVhQlVyMTRlMmNWOWp1VnpqYldKSUVFOFlyZGdDeURweHlhUXhUS3otazJMY0VFV2dfWEpHbWlON21iWDBqdHBzQVlwOTI3dlZ2bHJ2ZlA0QXFvTy1VdnNOeDVZcWg1UVFWY3RFaV9zRlFzUA?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="technology" data-title="sleep tech products revolutionize modern wellness industry in 2026">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Technology Desk</span>
-            <span class="category-badge">Technology</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">Sleep Tech Products Revolutionize Modern Wellness Industry in 2026</h2>
-        <p class="news-summary">GENEVA — Public debates concerning 'Sleep Tech Products Revolutionize Modern Wellness Industry in 2026' have reached a critical inflection point, according to Technology Desk coverage. Industry experts suggest this move will accelerate tech consolidation and redefine operational standards. Early stakeholder reactions suggest that this move could disrupt current operational models. The shift underscores a broader structural trend that has been gaining momentum over recent months. Strategic planners are recommending regular reviews to keep pace with these fast-moving events.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNM3hFb2E3a2t0eGtnS3dhODg3V0U0Um9jbVlGVkdLVXdIMFd0dkg4OTgtY29keGRVb3MtQmZZbDBma1hXQ1FnUEd6Q1lBaUwyZXQ2UzdFcnNLZTluMnFMQ1E0clpZTVdYMUREMld5Vi16aWtValgyOFpUYmlaOTJuRnA0SjRSbVc1Szc4Q1lCbU82dXZmaVcxc3F5Z3RxNGU0MXhBWFdtVDE5QQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="technology" data-title="how the middle-class should adjust to ai economy | mumbai news">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Technology Desk</span>
-            <span class="category-badge">Technology</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">How the middle-class should adjust to AI economy | Mumbai news</h2>
-        <p class="news-summary">MUMBAI — MUMBAI: For more than three decades, India built one of the most successful middle-class expansion engines in modern economic history by industrialising cognition at scale. Millions of engineers maintained systems, processed tickets, tested code, and kept the software of global business running. If China was the world’s factory, India became its back office. The arrangement worked spectacularly because the global economy rewarded execution. Deliver predictability at scale.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPRFhQS3Z5RkxGdnlQQlhNLVY1UzNCNTNGa3NPYzRKUlFLZGE0SWc4MDNmZGpldEtpeG1tUGxsVURoOTBsZ0cyUlpvVms3dTJvTGZtYWhDTEVSQmRoTU9KY2RWM2pycnpZSGtXUWpxejh2N1Y4MW53RFpxODdnMlJ2aTJSZWU1QzA4dHZWVm1OV1h1ZlNPLUhEd0Rvc0VhME14cThadFJOSHM4VzNGeFZWMFFXZl9XNVZYZEZJ0gHAAUFVX3lxTE14Q2NNcGNlYnVpZ2RfRGxiSTBzeEFrMldCT1VBNXhOaE9mY2twVU1XYTQ3QldKdXdqejVHRUc5dl9Yc21VN0NOMm1hQUQ1aWJoZ1VqaWQ1b28yeE9LMWlqU01oY0hIZWxzamNxcFlDdFpYSEZ1aFIwVGs1TnBKSmNtRC1abHJXMzNsTmNzb01qbXBwa1hrQzlNMkUyRDkzcmtRbjdXRHpsVmxDVWhOWmZIUG92TGNfX3pEYWppN0d0Vg?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="economy" data-title="the political economy of cash transfers">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Politics Desk</span>
-            <span class="category-badge">Economy</span>
-          </div>
-          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
-        </div>
-        <h2 class="news-title">The political economy of cash transfers</h2>
-        <p class="news-summary">NEW DELHI — A critical shift is unfolding as dispatches from Politics Desk signal key structural changes regarding 'The political economy of cash transfers'. This fiscal shift highlights key pressure points in global markets, including rising operational overheads. Operational managers are already formulating transition protocols to minimize service interruptions. Industry observers note that this represents a pivotal chapter in contemporary economy discussions. Further official statements are expected shortly to clarify the remaining ambiguities.</p>
-        <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxNT1NmVldyWTRLVnQtdW1UM1Q1YUFZcVkwYVZ2UmVVSDRhNWVqeEtmMmlKM2swRGZmekI0UXRLSXpRVHUyYlJEalltWnltVVdRUnNLUWY2UDlBUS1qcE9xVlJQd05XbmlzYnpybEhCeGtncG40SHRJOWJtQ09iRzhhOUNaN2ZxUDVIRmt3Xw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
-            Read original source »
-          </a>
-          <button class="expand-btn">
-            <span>Expand Despatch</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="news-card" data-category="economy" data-title="china - government, economy, politics">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">Politics Desk</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">CNBC</span>
+            <span class="category-badge">Macro & Markets</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
         </div>
-        <h2 class="news-title">China - Government, Economy, Politics</h2>
-        <p class="news-summary">BEIJING — Our editors will review what you’ve submitted and determine whether to revise the article. China has been a socialist country since 1949, and, for nearly all of that time, the government has played a predominant role in the economy. In the industrial sector, for example, the state long owned outright nearly all of the firms producing China’s manufacturing output. The proportion of overall industrial capacity controlled by the government has gradually declined, although heavy industries have remained largely state owned. In the urban sector the government has set the prices for key commodities, determined the level and general distribution of investment funds, prescribed output targets for major enterprises and branches, allocat...</p>
+
+        <h2 class="news-title">Fed Governor Michelle Bowman warns against hiking interest rates because of inflation spike</h2>
+        <p class="news-summary">SINGAPORE — Federal Reserve Governor Michelle Bowman on Friday cautioned against raising interest rates to address the current spike in prices. With inflation running well above the central bank's 2% target, markets are expecting the Fed to stay on hold this year then possibly start raising rates in early 2027.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTE9OcEtHWEtUdHgxQUtQaHB6UVMwRDczSjRTWmhuS0pmRXdMeGN3ckJkSnhxZU9MdjlDWVJaVjljazRpN1F5US0yWndMR29pWjRRaGJ3dXdhWDVFcEhTTm5WMkFTdEU4a1BLN1BJaGdvbjJCNEU?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSU1FUWtLRzNfdWhmdVJvYVBMeFpYaVowRGhjUFN4NXZmbzdVNUx1OFAzdE42YktoU2tfOHNfeE5uNzdFNDdreXBZX0lBMDM3a0otZkhJbFgxaGlPSm9Kam44SW92bmkwX0lBeTZidmlDdEVVaGdxOFNmQUY3Q0d1UFJ4RmRMT0JGVUFLWlJad3VRVHk2YTRYRmRxVzZjUk9SWHdnRUw5MTNCemvSAbABQVVfeXFMTVVRMVlKLXIzTUdra0lSZm44VWxLWWozUF9vY0RTRHZPbExxcDRQQmVhb1pZU01rZGVLUEtyTDcyT2k4LUMwNU9PX2t5dFhPci1YTTJtbXU5blQzQnFkMEM4cy1BVjJTTE43NWtBZWpGTXJRSlZQWnI3YnJQS2ROOXdXVVFPX0MtVjdkck1GbUhNU0tFaUlaVU8yVUFMcDVTR05ScktyLXk1YkFvNDExd1o?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -716,18 +590,20 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="economy" data-title="a weaker world economy looms, but india and the us are still holding up, suggests wef">
+      <div class="news-card " data-category="macro & markets" data-title="anthropic raises $65 billion, nears $1t valuation ahead of ipo">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">World Desk</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">TechCrunch</span>
+            <span class="category-badge">Macro & Markets</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
         </div>
-        <h2 class="news-title">A weaker world economy looms, but India and the US are still holding up, suggests WEF</h2>
-        <p class="news-summary">MUMBAI — Nearly nine out of 10 economists surveyed by the World Economic Forum expect global growth to weaken in the coming years. The report says conflict in the Middle East and the closure of the Strait of Hormuz have disrupted supply chains, raised prices and increased uncertainty. Despite weaker global sentiment, 58% of respondents said a global recession is not imminent. Growth expectations remain moderate to high for India and the US, supported in part by investment and consumption. India stands out with the strongest growth expectations, but faces risks from inflation, rupee pressure, urban unemployment and the Middle East conflict.</p>
+
+        <h2 class="news-title">Anthropic raises $65 billion, nears $1T valuation ahead of IPO</h2>
+        <p class="news-summary">NEW DELHI — Anthropic has snagged $65 billion in funding at a $965 billion post-money valuation in its latest funding round, marking what could be the AI startup’s last private fundraising before debuting on the public markets. Strategic infrastructure partners, including Samsung, SK Hynix, and Micron, also joined the round.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxORXZQd0hMdGIxT3RqRUVheThlZGdVM0hlalN4anFyZnFLY281T0d3RTBQR09nVVN1blhFWXZTd1ZzeXZVaFJqdVlUQ1NaVjVhc1M5Q081aG9PdmtWQnVIUUE2aFlRZ2pfZUxjREZSNTF0c0loRXlCQW9yUzdkUWJhNnBvLXE2RlgxR1RUckdBMno5LWRDZjRZekx2OWJ5VGh6aU9vWWV4QnRqVDBDUC1wRFFpNTR1NGxsY1lVdlpIQdIBzAFBVV95cUxPalpUWkVsbDhycEdMcFVSSjBhWlhOUUxzYlVEVVNXaHppUm5IekJSd2htbXBPb2c5dnl4TWdnTzhyelhpbG05Z0Q4U0RJRXY2RWxTR1dJY242UjhON01ocVhCV251SWMzUHQydTJyOFNKd1hvek0xcVRnazJ4OGI0YXN0dHFKelRoOVlsQTViRkU4Q2lVUldRY09iSVgyVFFWNTVnWTl3RlhsOXhCaHhOYldRMkZ3V0k5a1J4c09vbHIyUTNnRnY0NEpKdXU?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPNFJZbFFxa0ZvbjBzTzhhbm9jMnVPYTFJdW1JdjU4NE5qblhSVTJrQkxna0lneXo1T1IxZnE2UFd6dm82VDFpcW1HaWEwcVJDaUJtUGJHZWg4UDBUd0otWDNFbzVhbWFuQ3kzbm5odjNBeGw0YkFhMDhEcllVcDR4dXhnMmJ6MFhPZGt5YW1VNkZzWXNlbkJWcldn?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -736,18 +612,20 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="general" data-title="chief economists' outlook: may 2026">
+      <div class="news-card " data-category="leadership & governance" data-title="in china, amd ceo lisa su is understated while nvidia's huang is more razzmatazz">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">World Desk</span>
-            <span class="category-badge">General</span>
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Leadership & Governance</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">Chief Economists' Outlook: May 2026</h2>
-        <p class="news-summary">LONDON — An official statement published by World Desk outlines dramatic strategic adjustments regarding 'Chief Economists' Outlook: May 2026'. Stakeholders are keeping a close watch on subsequent updates to formulate their responsive plans. Operational managers are already formulating transition protocols to minimize service interruptions. Industry observers note that this represents a pivotal chapter in contemporary general discussions. Further official statements are expected shortly to clarify the remaining ambiguities.</p>
+
+        <h2 class="news-title">In China, AMD CEO Lisa Su is understated while Nvidia's Huang is more razzmatazz</h2>
+        <p class="news-summary">BEIJING — A significant corporate development was reported as verified briefs detail shifts regarding 'In China, AMD CEO Lisa Su is understated while Nvidia's Huang is more razzmatazz'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFBsazZsWk94RXRSRm1BU2NJRkR2X2xJU2JMeWxVYzBlWmRaSDFZRG9SYWtfMXZXRTVZVUxfS1ZSX3E3U1BRdTlNSWZEV1BYM0pqZUtJczNTeGk0NlhuWm1OREtqQjlCdDFUVWtvV1kxdGplVUJYbnluMDlqdw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOenc2VTkxWDAwWWhITVY3dkhZZktPRTZIVVNtRE0wMFRraXQtY3FnWXljVmFjd0dsMjRMekE0aktuRnNWMW9tTzZZR3JLbHpPWTA3eDc0dkkxSGp2M1NLLUlpNTBPb2J1X0VseVpncTZpYl9mSU9lT0VBel95ZnlqZzAzbVFZUUxFZlJqdkEzYVVvdWlhVHVINnlidVUwTVRpUmNCVk1NNkMyMzBxakpoNDVOMHZEQnRRY0QzTFVqOWI?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -756,18 +634,20 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="economy" data-title="polish scientists and students rally in campaign for 3% funding target">
+      <div class="news-card " data-category="macro & markets" data-title="us to appeal judge’s order for broad refund of trump tariffs">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Science Desk</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">Bloomberg.com</span>
+            <span class="category-badge">Macro & Markets</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">Polish scientists and students rally in campaign for 3% funding target</h2>
-        <p class="news-summary">MUMBAI — Per latest briefs from Science Desk, the evolving context surrounding 'Polish scientists and students rally in campaign for 3% funding target' has taken center stage. Financial observers indicate that the move is likely to influence investor sentiment and interest rates. Early stakeholder reactions suggest that this move could disrupt current operational models. The shift underscores a broader structural trend that has been gaining momentum over recent months. Strategic planners are recommending regular reviews to keep pace with these fast-moving events.</p>
+
+        <h2 class="news-title">US to Appeal Judge’s Order for Broad Refund of Trump Tariffs</h2>
+        <p class="news-summary">LONDON — A significant corporate development was reported as verified briefs detail shifts regarding 'US to Appeal Judge’s Order for Broad Refund of Trump Tariffs'. The developing macroeconomic landscape is expected to influence broader interest rate projections and corporate credit yields over the coming quarters.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNZ1JsOWtaYmJrOXJaQWJtTUx3eGtKUVA3RVV0MFJwc0RzNlFlYVJxQ0VfX3FMT1U1SWdoVnZITUdwWWQ4N3ZXYlZxZW5jTUsySGFPaFJOcG1ud01ibDBYa05zX3RpTDgzaHV3STgtSnFpVWRDMzVGS1RSNmJITTdEV0pXLTJscU5zX0JDaEZUVWJtSWxKY0VFMVJLQWZCME1VUDZramdR?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxNd3FObDNNUHo2MlpjZFFPREhJaTZ5Q3BLMElGYXVPcldZVmltaW5kUGozSUh4MUhMUkdld1ZDTzY1czAtN09pMWo3NG91YmxMWjBZOHBocUZJcFVtbHBtcmhkREJBcVh5b05WNTZIWnpkVU81dkhYeVA1bk5qQ3NUM0pMZ0l4VldMbXZMT3cxVm1oM3p4UHZwU19LWXF0eUdJMUZONzBHSThyWjM2cE1RUA?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -776,18 +656,20 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="economy" data-title="zef scientific retains lcms industry expert to accelerate business expansion">
+      <div class="news-card " data-category="macro & markets" data-title="kalshi is moving beyond prediction markets and into one of crypto's biggest trading lanes">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Science Desk</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">CNBC</span>
+            <span class="category-badge">Macro & Markets</span>
+            
           </div>
           <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">Zef Scientific Retains LCMS Industry Expert to Accelerate Business Expansion</h2>
-        <p class="news-summary">LONDON — An official statement published by Science Desk outlines dramatic strategic adjustments regarding 'Zef Scientific Retains LCMS Industry Expert to Accelerate Business Expansion'. Market dynamics are responding rapidly, signaling a potential period of consolidation across major indices. Immediate market responses have been mixed, reflecting a cautious wait-and-see approach. The situation serves as a clear illustration of how rapidly the economy landscape is transforming. A comprehensive press briefing is scheduled next week to outline the subsequent roadmap.</p>
+
+        <h2 class="news-title">Kalshi is moving beyond prediction markets and into one of crypto's biggest trading lanes</h2>
+        <p class="news-summary">MUMBAI — Prediction markets giant Kalshi announced Friday it plans to launch perpetual futures contracts, starting with crypto perpetuals. traders a regulated alternative to offshore platforms that have dominated this market.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxOSTVheW5uN0lPazRqLUVvRzgwaXFTQ1UxY2RyaTJ6X2hGZHFkNUxvVmFQYXhCV3lBcmJhTkVXVWJNcU1XY0FUN0tOVTJ6MUZ2QmQwbFZFdm5haHlFWUpMNzNpbXk1RTF1dmNlQlFLQlVTcjZpUUJPbjRnZGk3a0pfOENNenNoNnNmS0JNalp2eThfWU1BcUFOZUpnbEEzYXhFOHVDQ2QtUzB6SzNvM3VtNUVENnh6cmRxbDBkY2FVUEJtOTJRRndKNXlCRk1OQQ?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxNejNoc1c2UFNFeFRncnU1THlPaTcxT2p6X3ZfTVc2UWk5MjRwTUlrUlFESXVOX3lGWkxQNDlqTmRqQU13anlfWnl6UkRtWU9JSUR6aW1QWWVpX29kQzFtTDE3MU5iNWZ0dHU4N29mekFqRDRadHNPOUZNcjd5MG00ZlAzdjktbkJjRzRSQUZ0d3F0UEo2cHItc1pPaV9PbFJLVU5ZMmN0bHhvalZYcUlRSW1nbHpyd3pvVFdmeWIzeVlsNEnSAcgBQVVfeXFMTi1jOGZkLURpYUFTN0hpbHB0QTJYbjlGVlFmVTBpUTVaRmtiT2VoMGhNTlVGRzZhQllSTlFQOHgzTWhtR0ZBcEpWMG9GU2plT0FxWFcxd1dock9Qd0pCb2s3TEttb3lKSUNPX3JETHZkMy1LbjZMYlpUQmdlMVRGY3Y3bi1UYW5UMHMzLTByeDNmTEtCMlNWUnFFYV9hNlJnYWpBZ25UbmNIRDlJSGhVMUVwV1FVbU1LM0czQ2Vyb1c0Wk9na1FHZUk?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -796,18 +678,20 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="economy" data-title="sbj unpacks: preparing for world cup’s marketing blitz">
+      <div class="news-card " data-category="strategy & m&a" data-title="easyjet draws takeover interest from private credit firm castlelake">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Sports Desk</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">Financial Times</span>
+            <span class="category-badge">Strategy & M&A</span>
+            
           </div>
-          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">SBJ Unpacks: Preparing for World Cup’s marketing blitz</h2>
-        <p class="news-summary">GENEVA — Tonight in Unpacks: The biggest World Cup tournament in FIFA’s history has three nations preparing for a marketing effort unlike any seen before, as SBJ’s Terry Lefton reports in this early look at next week’s magazine. Listen to SBJ’s most popular podcast, Morning Buzzcast, where Abe Madkour wraps up the week with Sacramento’s effort to bring an MLB expansion team to the nation’s 20th-largest media market, the NBA’s Draft Lottery changes aimed at tanking, Elevate leading the search for the next Big East commissioner and more. It can be difficult even for sponsors to get their arms around the 2026 FIFA World Cup. Derek Aframe, Octagon executive vice president/head of integrated marketing, who is working his 10th World Cup (men’s...</p>
+
+        <h2 class="news-title">EasyJet draws takeover interest from private credit firm Castlelake</h2>
+        <p class="news-summary">SINGAPORE — A significant corporate development was reported as verified briefs detail shifts regarding 'EasyJet draws takeover interest from private credit firm Castlelake'. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE9La050dzBjaDFDVlByOHhXVGxEUndObFltY19uRHVCdVZEQjR1WWtFUVpuQjFzUkxtNmNDY2JudmlmR1hua3dOZUl6ZXZ0aktQcHBXOXVjeXhBcDBxRjZWT3pGWDZ5UXhwMWRabkdZX0RnVkFBZ2VMaTVR?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQa3JraGtqUHVJZG04SDdiZUFObGdiOEpSNlJlNm95Yk1vYXJudjJsRWEyQzJaQ090azBGUFVJU2FLTEp4WDlOb3l4amtMeUVmaEVyTVdabmlPNThWOF84cWZ3VWo3dnlHYlBKWUxGWTFqa0UteU1jLUFMVXo0bF9TcXJobDY?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -816,18 +700,42 @@
         </div>
       </div>
       
-      <div class="news-card" data-category="economy" data-title="chart of the week: there's more to prediction markets than sports">
+      <div class="news-card " data-category="leadership & governance" data-title="danish pension blacklists spacex over ‘catastrophic governance’">
         <div class="card-header">
           <div class="card-meta">
-            <span class="source-badge">Sports Desk</span>
-            <span class="category-badge">Economy</span>
+            <span class="source-badge">Bloomberg.com</span>
+            <span class="category-badge">Leadership & Governance</span>
+            
           </div>
-          <div class="sentiment-indicator sentiment-positive" title="Sentiment: Positive"></div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
         </div>
-        <h2 class="news-title">Chart of the week: There's more to prediction markets than sports</h2>
-        <p class="news-summary">TOKYO — A pattern tends to emerge during major news cycles. A big event — like the 2024 election, or the Super Bowl, or March Madness — dominates headlines, and by extension prediction market volumes, so people come away with the impression that âthatâs the only thing prediction markets are good for.â And while earlier narratives may have suggested prediction markets were only viable during election cycles, prediction markets have seen significant growth in other sectors. At the time of the Kalshi Research Conference in March earlier this year, sports trading had just hit nearly $3 billion in weekly volume — roughly 80% of Kalshiâs total, largely driven by March Madness. But the more revealing stat? Sports as a share of total vol...</p>
+
+        <h2 class="news-title">Danish Pension Blacklists SpaceX Over ‘Catastrophic Governance’</h2>
+        <p class="news-summary">SINGAPORE — A significant corporate development was reported as verified briefs detail shifts regarding 'Danish Pension Blacklists SpaceX Over ‘Catastrophic Governance’'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
         <div class="card-footer">
-          <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQdUJGd2dUWmJEX2twamZWQkpfbE5TOXJZVVh4Uk4zYU9KSzdpbGhsa25OQUFqdXFpTHRvRE9weGpEa1BvZ2JxMk9pczJEX19BVjhaU0g4MTVTWVVJME5nbmZpV182RkxncFduc2VFZVRxQXRjal9xSzN2a2dpM0R5M21Rdw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+          <a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQWjNQTzhxdi1QUF8zNUJKNVo4QkVadmVaNmRkS1NWQUc5TVAweWIyNUN2QmREX3JiMGw0RWlnMWtBTXdTb3lzX3lEWENmdDlkbHlFcmRYSk53bmVNV3BRMkg4ZURYMTJJVUF1eWlfaDdqNElpT1VKeFpxY0E3WlhSZFQ0S0tVSmZQbXduRGpEaVFYUDdYbjUzZTljYXNQVWU4dzdWUlIxcGdyYzY4MER5QmJBdw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
+            Read original source »
+          </a>
+          <button class="expand-btn">
+            <span>Expand Despatch</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="news-card " data-category="leadership & governance" data-title="social media companies to pay $27 million to settle kentucky school district's lawsuit, records show">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="source-badge">Reuters</span>
+            <span class="category-badge">Leadership & Governance</span>
+            
+          </div>
+          <div class="sentiment-indicator sentiment-neutral" title="Sentiment: Neutral"></div>
+        </div>
+
+        <h2 class="news-title">Social media companies to pay $27 million to settle Kentucky school district's lawsuit, records show</h2>
+        <p class="news-summary">TOKYO — A significant corporate development was reported as verified briefs detail shifts regarding 'Social media companies to pay $27 million to settle Kentucky school district's lawsuit, records show'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
+        <div class="card-footer">
+          <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPOTF5Njhna0RCOG1QZ29JXy1EdXgtNEtmWU02aXNldTdFeDZzZ1d4U0lfNGQzNml1UjlKaWtxdF8wV0RQUVRQejBfNHhGMk1hYVhiVVhmSDRvYjMtSXVXd0RGV2xOMmtXVFpfYmxLYnZpUVZvZDZLc0tqOFAxSFNFdEJVa3lNWjg5MGdWbi1iczc5SGk4bFNVdDlmWnpMLWtNQjdPWXk5YnUxTzJjZC1FMHhoRDZ2OVFxekE2OUJaRWs?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
           </a>
           <button class="expand-btn">
@@ -982,7 +890,7 @@
 
       data.articles.forEach(article => {
         const card = document.createElement('div');
-        card.className = 'news-card';
+        card.className = 'news-card' + (article.front_page ? ' front-page-card' : '');
         card.setAttribute('data-category', article.category.toLowerCase());
         card.setAttribute('data-title', article.title.toLowerCase());
         
@@ -991,11 +899,13 @@
             <div class="card-meta">
               <span class="source-badge">${article.source}</span>
               <span class="category-badge">${article.category}</span>
+              ${article.front_page ? '<span class="front-page-badge">★ Front Page Despatch</span>' : ''}
             </div>
             <div class="sentiment-indicator sentiment-${article.sentiment.toLowerCase()}" title="Sentiment: ${article.sentiment}"></div>
           </div>
           <h2 class="news-title">${article.title}</h2>
-          <p class="news-summary">${article.summary}</p>\n          <div class="card-footer">
+          <p class="news-summary">${article.summary}</p>
+          <div class="card-footer">
             <a href="${article.url}" target="_blank" class="read-more" onclick="event.stopPropagation();">
               Read original source »
             </a>

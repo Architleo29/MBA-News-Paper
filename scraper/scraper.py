@@ -14,18 +14,21 @@ class NewsScraper:
             "Accept-Language": "en-US,en;q=0.5",
         }
         self.sources = {
-            "Hindustan Times": "https://www.hindustantimes.com/business",
-            "Times of India": "https://timesofindia.indiatimes.com/business",
-            "Reuters": "https://www.reuters.com/business",
-            "Bloomberg": "https://www.bloomberg.com/"
+            "CNBC": "https://www.cnbc.com/",
+            "Financial Times": "https://www.ft.com/",
+            "Reuters": "https://www.reuters.com/",
+            "Bloomberg": "https://www.bloomberg.com/",
+            "TechCrunch": "https://techcrunch.com/",
+            "Fortune": "https://fortune.com/"
         }
-        # Direct high-fidelity RSS endpoints focusing specifically on business, corporate, finance, and macroeconomics
+        # Direct high-fidelity RSS endpoints focusing on B-school curriculum categories
         self.rss_endpoints = {
-            "Hindustan Times": "https://news.google.com/rss/search?q=source:%22Hindustan+Times%22+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-IN&gl=IN&ceid=IN:en",
-            "Times of India": "https://news.google.com/rss/search?q=source:%22Times+of+India%22+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-IN&gl=IN&ceid=IN:en",
-            "Reuters": "https://news.google.com/rss/search?q=source:Reuters+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-US&gl=US&ceid=US:en",
-            "Bloomberg": "https://news.google.com/rss/search?q=source:Bloomberg+(business+OR+economy+OR+corporate+OR+markets+OR+finance)&hl=en-US&gl=US&ceid=US:en"
+            "Macro & Markets": "https://news.google.com/rss/search?q=(%22monetary+policy%22+OR+%22interest+rates%22+OR+tariffs+OR+inflation+OR+currency+OR+Fed+OR+markets+OR+treasury+OR+bonds)+site:cnbc.com+OR+site:reuters.com+OR+site:finance.yahoo.com+OR+site:bloomberg.com&hl=en-US&gl=US&ceid=US:en",
+            "Strategy & M&A": "https://news.google.com/rss/search?q=(mergers+OR+acquisitions+OR+M%26A+OR+antitrust+OR+restructuring+OR+takeover+OR+buyout)+site:ft.com+OR+site:marketwatch.com+OR+site:bloomberg.com+OR+site:reuters.com&hl=en-US&gl=US&ceid=US:en",
+            "Venture & Disruption": "https://news.google.com/rss/search?q=(startup+funding+OR+%22venture+capital%22+OR+VC+OR+%22enterprise+AI%22+OR+IPO+OR+disruptive+OR+unicorn)+site:techcrunch.com+OR+site:venturebeat.com+OR+site:bloomberg.com+OR+site:wsj.com&hl=en-US&gl=US&ceid=US:en",
+            "Leadership & Governance": "https://news.google.com/rss/search?q=(CEO+OR+boardroom+OR+%22activist+investor%22+OR+governance+OR+succession+OR+%22proxy+battle%22+OR+scandal+OR+lawsuit)+site:fortune.com+OR+site:bloomberg.com+OR+site:reuters.com+OR+site:ft.com&hl=en-US&gl=US&ceid=US:en"
         }
+
 
     def clean_text(self, text):
         if not text:
@@ -182,17 +185,27 @@ class NewsScraper:
 
 
     def get_topic_news(self, topic, limit=2):
-        """Queries Google News RSS search to fetch fresh stories specifically for a target topic/category with a business/management slant."""
-        print(f"Scraping category-specific news for topic: {topic}...")
-        query = urllib.parse.quote(f"{topic} (business OR economy OR corporate OR industry OR markets)")
-        rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en"
-        
-        articles = []
-        try:
-            response = requests.get(rss_url, headers=self.headers, timeout=10)
-            if response.status_code == 200:
+        """Deprecated: returning empty list as part of B-school curriculum pivot."""
+        return []
+
+    def get_india_metro_news(self):
+        """Deprecated: returning empty list as part of B-school curriculum pivot."""
+        return []
+
+    def scrape_all(self, limit_per_source=3):
+        """Scrapes B-school feeds and returns aggregated, filtered, scored, and clustered articles."""
+        all_articles = []
+        for category, rss_url in self.rss_endpoints.items():
+            print(f"Scraping category '{category}' from premium feeds...")
+            try:
+                response = requests.get(rss_url, headers=self.headers, timeout=10)
+                if response.status_code != 200:
+                    continue
+                
                 root = ET.fromstring(response.content)
                 items = root.findall('.//item')
+                
+                count = 0
                 for item in items:
                     title_el = item.find('title')
                     link_el = item.find('link')
@@ -201,77 +214,68 @@ class NewsScraper:
                     title = self.clean_text(title_el.text if title_el is not None else "")
                     link = link_el.text if link_el is not None else ""
                     description = self.clean_text(desc_el.text if desc_el is not None else "")
-                    
                     description = re.sub(r'<[^>]*>', '', description)
                     
                     if title and link:
+                        # Extract clean source name
+                        source_name = "Premium Business Desk"
                         if " - " in title:
-                            title = title.rsplit(" - ", 1)[0]
+                            title, source_name = title.rsplit(" - ", 1)
+                        
+                        # Discard lifestyle/crime/local news (Step 2: Filtering)
+                        title_lower = title.lower()
+                        desc_lower = description.lower()
+                        negative_terms = ["recipe", "review", "movie", "cricket", "football", "sports", "gaming", "celebrity", "crime", "lifestyle", "horoscope", "travel", "fashion"]
+                        if any(w in title_lower or w in desc_lower for w in negative_terms):
+                            continue
                             
-                        articles.append({
-                            "source": f"{topic.title()} Desk",
-                            "title": title,
-                            "url": link,
-                            "snippet": description or f"Latest updates from the {topic} news desk."
-                        })
-                        if len(articles) >= limit:
-                            break
-        except Exception as e:
-            print(f"Error fetching topic news for {topic}: {e}")
-            
-        print(f"Successfully scraped {len(articles)} articles for topic: {topic}")
-        return articles
-
-    def get_india_metro_news(self):
-        """Fetches regional verified business and infrastructure news covering major Indian metro cities (Delhi, Mumbai, Kolkata, Chennai, Bengaluru)."""
-        cities = ["Delhi", "Mumbai", "Kolkata", "Chennai", "Bengaluru"]
-        articles = []
-        print(f"Scraping India Metro Gazette news for: {', '.join(cities)}...")
-        
-        for city in cities:
-            try:
-                query = urllib.parse.quote(f"{city} (business OR corporate OR startups OR infrastructure OR economy OR real-estate)")
-                rss_url = f"https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en"
-                
-                response = requests.get(rss_url, headers=self.headers, timeout=10)
-                if response.status_code == 200:
-                    root = ET.fromstring(response.content)
-                    items = root.findall('.//item')
-                    
-                    for item in items:
-                        title_el = item.find('title')
-                        link_el = item.find('link')
-                        desc_el = item.find('description')
-                        
-                        title = self.clean_text(title_el.text if title_el is not None else "")
-                        link = link_el.text if link_el is not None else ""
-                        description = self.clean_text(desc_el.text if desc_el is not None else "")
-                        
-                        description = re.sub(r'<[^>]*>', '', description)
-                        
-                        if title and link:
-                            if " - " in title:
-                                title = title.rsplit(" - ", 1)[0]
+                        # Keywords to prioritize / score (Step 2: Scoring)
+                        positive_terms = ["acquisition", "merger", "ipo", "venture capital", "fed", "interest rates", "antitrust", "default", "proxy battle", "boardroom", "ceo", "succession", "restructuring", "activist investor"]
+                        score = 0
+                        for term in positive_terms:
+                            if term in title_lower:
+                                score += 5
+                            if term in desc_lower:
+                                score += 2
                                 
-                            articles.append({
-                                "source": f"Metro Gazette ({city})",
-                                "title": title,
-                                "url": link,
-                                "snippet": description or f"Latest news updates from the {city} metropolitan region."
-                            })
+                        all_articles.append({
+                            "source": source_name.strip(),
+                            "title": title.strip(),
+                            "url": link,
+                            "snippet": description or f"Latest brief from our {category} desk.",
+                            "category": category,
+                            "score": score,
+                            "front_page": False
+                        })
+                        count += 1
+                        if count >= limit_per_source:
                             break
             except Exception as e:
-                print(f"Error fetching news for city {city}: {e}")
+                print(f"Error scraping '{category}': {e}")
                 
-        print(f"Successfully scraped {len(articles)} India metro despatches")
-        return articles
-
-    def scrape_all(self, limit_per_source=3):
-        all_articles = []
-        for name, url in self.sources.items():
-            site_articles = self.scrape_site(name, url, limit_per_source)
-            all_articles.extend(site_articles)
+        # Step 3: Cross-Reference Popularity & Impact ("Front Page Despatch")
+        for i, art1 in enumerate(all_articles):
+            title1_words = set(re.findall(r'\b\w{4,}\b', art1["title"].lower()))
+            # Remove some common corporate words
+            title1_words -= {"says", "will", "after", "over", "with", "from", "million", "billion", "first", "into"}
+            
+            for j, art2 in enumerate(all_articles):
+                if i != j and art1["source"] != art2["source"]:
+                    title2_words = set(re.findall(r'\b\w{4,}\b', art2["title"].lower()))
+                    title2_words -= {"says", "will", "after", "over", "with", "from", "million", "billion", "first", "into"}
+                    
+                    overlap = title1_words.intersection(title2_words)
+                    # If they share at least 3 high-value nouns, they are breaking news stories!
+                    if len(overlap) >= 3:
+                        art1["front_page"] = True
+                        art2["front_page"] = True
+                        art1["score"] += 10  # Up-weight front page despatches!
+                        art2["score"] += 10
+                        
+        # Sort by score descending to prioritize high-signal stories!
+        all_articles.sort(key=lambda x: x["score"], reverse=True)
         return all_articles
+
 
     def fetch_article_content(self, url):
         """Fetches the full text content of an article for summarization."""
@@ -303,6 +307,18 @@ class NewsScraper:
                     text_blocks.append(txt)
             
             content = " ".join(text_blocks)
+            
+            # Check for pure paywall pages (e.g. Financial Times paywall splash page text)
+            paywall_indicators = [
+                "complete digital access", "ft weekend newspaper", "subscribe to read", 
+                "please subscribe", "unlimited digital access", "sign up for free trial", 
+                "already a subscriber", "register to read"
+            ]
+            content_lower = content.lower()
+            if any(indicator in content_lower for indicator in paywall_indicators):
+                print(f"Paywall signature detected for {target_url}. Discarding paywalled page body to fallback to title-based generator.")
+                return ""
+                
             if len(content) > 6000:
                 content = content[:6000] + "..."
             return content
