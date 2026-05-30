@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import re
 import xml.etree.ElementTree as ET
+from googlenewsdecoder import new_decoderv1
+
 
 class NewsScraper:
     def __init__(self):
@@ -273,8 +275,19 @@ class NewsScraper:
 
     def fetch_article_content(self, url):
         """Fetches the full text content of an article for summarization."""
+        # Decode Google News URL if applicable
+        target_url = url
+        if "news.google.com" in url:
+            try:
+                decoded = new_decoderv1(url)
+                if decoded.get("status"):
+                    target_url = decoded["decoded_url"]
+                    print(f"Decoded Google News URL to: {target_url}")
+            except Exception as e:
+                print(f"Error decoding Google News URL {url}: {e}")
+                
         try:
-            response = requests.get(url, headers=self.headers, timeout=10, allow_redirects=True)
+            response = requests.get(target_url, headers=self.headers, timeout=10, allow_redirects=True)
             if response.status_code != 200:
                 return ""
             
@@ -294,5 +307,6 @@ class NewsScraper:
                 content = content[:6000] + "..."
             return content
         except Exception as e:
-            print(f"Error fetching content from {url}: {e}")
+            print(f"Error fetching content from {target_url}: {e}")
             return ""
+

@@ -52,21 +52,23 @@ def main():
         return
 
     # Step 1.5: Ensure all topics are represented (completeness check)
+    import re
+    
     core_topics = {
-        "Technology": ["ai", "tech", "software", "chip", "nvidia", "groq", "anthropic", "openai", "bytedance", "cpu", "streamer"],
-        "Economy": ["market", "economy", "fed", "inflation", "stock", "funding", "valuation", "sales", "finance"],
-        "Politics": ["court", "election", "biden", "trump", "government", "senate", "parliament", "modi", "minister", "ceasefire", "truce", "judiciary", "justice"],
-        "World": ["war", "conflict", "summit", "china", "russia", "global", "border", "diplomacy"],
-        "Science": ["health", "cancer", "space", "mars", "nasa", "science", "climate", "breakthrough", "tree", "temple", "pharaoh"],
-        "Sports": ["sports", "cricket", "football", "match", "cup", "game", "win", "champion", "olympic", "sinner", "french open"]
+        "Technology": [r"\bai\b", r"\btech\b", r"\btechnology\b", r"\bsoftware\b", r"\bapple\b", r"\bgoogle\b", r"\bmicrosoft\b", r"\bcyber\b", r"\bchip\b", r"\bnvidia\b", r"\bquantum\b", r"\bgroq\b", r"\bopenai\b", r"\banthropic\b", r"\bbytedance\b", r"\bcpu\b"],
+        "Economy": [r"\bmarket\b", r"\beconomy\b", r"\bfed\b", r"\binflation\b", r"\bstock\b", r"\bdollar\b", r"\btrade\b", r"\bfinance\b", r"\brate\b", r"\bbloomberg\b", r"\bfunding\b", r"\bvaluation\b", r"\bsales\b", r"\bfiscal\b", r"\bbusiness\b"],
+        "Politics": [r"\bcourt\b", r"\belection\b", r"\bbiden\b", r"\btrump\b", r"\bgovernment\b", r"\bsenate\b", r"\bparliament\b", r"\bmodi\b", r"\bminister\b", r"\bceasefire\b", r"\bjudiciary\b", r"\bjustice\b", r"\bpolicy\b", r"\blegislative\b"],
+        "World": [r"\bwar\b", r"\bconflict\b", r"\bsummit\b", r"\bchina\b", r"\brussia\b", r"\bglobal\b", r"\bun\b", r"\bborder\b", r"\breuters\b", r"\btruce\b", r"\bdiplomacy\b", r"\bgeopolitical\b"],
+        "Science": [r"\bhealth\b", r"\bcancer\b", r"\bspace\b", r"\bmars\b", r"\bnasa\b", r"\bscience\b", r"\bclimate\b", r"\bcarbon\b", r"\bbreakthrough\b", r"\btree\b", r"\btemple\b", r"\bpharaoh\b"],
+        "Sports": [r"\bcricket\b", r"\bfootball\b", r"\bolympic\b", r"\bmatch\b", r"\bcup\b", r"\bgame\b", r"\bleague\b", r"\bwin\b", r"\bsinner\b", r"\bfrench open\b", r"\byadav\b", r"\buganda\b", r"\bpandya\b", r"\bindians\b", r"\bipl\b", r"\bt20\b", r"\bsquad\b", r"\bbatsman\b", r"\bbowler\b", r"\bwicket\b", r"\bruns\b", r"\bathletes\b", r"\btournament\b", r"\bchampionship\b", r"\bchampions\b", r"\bbcci\b", r"\bfifa\b", r"\bwimbledon\b", r"\batp\b", r"\bpayne\b"]
     }
 
     represented_categories = set()
     for article in raw_articles:
         text = (article["title"] + " " + article.get("snippet", "")).lower()
         guessed = "General"
-        for cat, keywords in core_topics.items():
-            if any(w in text for w in keywords):
+        for cat, patterns in core_topics.items():
+            if any(re.search(pat, text) for pat in patterns):
                 guessed = cat
                 break
         if "Metro Gazette" in article.get("source", ""):
@@ -83,6 +85,7 @@ def main():
             topic_articles = scraper.get_topic_news(topic=cat.lower(), limit=2)
             raw_articles.extend(topic_articles)
 
+
     # Step 2: Summarize and enrich articles
     print("\n--- Phase 2: AI Summarization & Categorization ---")
     enriched_articles = []
@@ -94,7 +97,8 @@ def main():
         content = scraper.fetch_article_content(article['url'])
         
         # AI Summarization
-        analysis = summarizer.summarize(article['title'], content)
+        analysis = summarizer.summarize(article['title'], content, article.get('source'))
+
         
         # Force category to 'Local' if the article is from the metro gazette
         category = "Local" if "Metro Gazette" in article.get("source", "") else analysis["category"]
