@@ -4,10 +4,14 @@ import urllib.parse
 import re
 import xml.etree.ElementTree as ET
 from googlenewsdecoder import new_decoderv1
+import os
+from dotenv import load_dotenv
 
 
 class NewsScraper:
     def __init__(self):
+        load_dotenv()
+        self.newsapi_key = os.getenv("NEWSAPI_KEY")
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -253,6 +257,14 @@ class NewsScraper:
             except Exception as e:
                 print(f"Error scraping '{category}': {e}")
                 
+        # Scrape NewsAPI fintech news if API key is present
+        if self.newsapi_key:
+            try:
+                fintech_articles = self.scrape_newsapi_fintech(limit=limit_per_source)
+                all_articles.extend(fintech_articles)
+            except Exception as e:
+                print(f"Error fetching fintech news from NewsAPI: {e}")
+                
         # Step 3: Cross-Reference Popularity & Impact ("Front Page Despatch")
         for i, art1 in enumerate(all_articles):
             title1_words = set(re.findall(r'\b\w{4,}\b', art1["title"].lower()))
@@ -325,4 +337,40 @@ class NewsScraper:
         except Exception as e:
             print(f"Error fetching content from {target_url}: {e}")
             return ""
+
+    def scrape_newsapi_fintech(self, limit=5):
+        if not self.newsapi_key:
+            return []
+        
+        print("Scraping fintech news from NewsAPI...")
+        url = f"https://newsapi.org/v2/everything?q=fintech&sortBy=publishedAt&pageSize={limit}&apiKey={self.newsapi_key}"
+        try:
+            response = requests.get(url, timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                articles = []
+                for item in data.get("articles", []):
+                    title = self.clean_text(item.get("title", ""))
+                    link = item.get("url", "")
+                    description = self.clean_text(item.get("description", "") or item.get("content", ""))
+                    description = re.sub(r'<[^>]*>', '', description)
+                    source_name = item.get("source", {}).get("name", "NewsAPI Desk")
+                    
+                    if title and link:
+                        articles.append({
+                            "source": source_name,
+                            "title": title,
+                            "url": link,
+                            "snippet": description or "Latest fintech bulletin.",
+                            "category": "Venture & Disruption",
+                            "score": 8,
+                            "front_page": False
+                        })
+                print(f"Successfully scraped {len(articles)} fintech articles from NewsAPI.")
+                return articles
+            else:
+                print(f"NewsAPI error: HTTP {response.status_code}")
+        except Exception as e:
+            print(f"Error calling NewsAPI: {e}")
+        return []
 
