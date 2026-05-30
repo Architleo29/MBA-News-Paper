@@ -473,16 +473,7 @@
     {% if articles %}
       {% for article in articles %}
       <div class="news-card {% if article.front_page %}front-page-card{% endif %}" data-category="{{ article.category|lower }}" data-title="{{ article.title|lower }}">
-        <div class="card-header">
-          <div class="card-meta">
-            <span class="source-badge">{{ article.source }}</span>
-            <span class="category-badge">{{ article.category }}</span>
-            {% if article.front_page %}
-              <span class="front-page-badge">★ Front Page Despatch</span>
-            {% endif %}
-          </div>
-          <div class="sentiment-indicator sentiment-{{ article.sentiment|lower }}" title="Sentiment: {{ article.sentiment }}"></div>
-        </div>
+
 
         <h2 class="news-title">{{ article.title }}</h2>
         <p class="news-summary">{{ article.summary }}</p>
@@ -651,14 +642,6 @@
         card.setAttribute('data-title', article.title.toLowerCase());
         
         card.innerHTML = `
-          <div class="card-header">
-            <div class="card-meta">
-              <span class="source-badge">${article.source}</span>
-              <span class="category-badge">${article.category}</span>
-              ${article.front_page ? '<span class="front-page-badge">★ Front Page Despatch</span>' : ''}
-            </div>
-            <div class="sentiment-indicator sentiment-${article.sentiment.toLowerCase()}" title="Sentiment: ${article.sentiment}"></div>
-          </div>
           <h2 class="news-title">${article.title}</h2>
           <p class="news-summary">${article.summary}</p>
           <div class="card-footer">
