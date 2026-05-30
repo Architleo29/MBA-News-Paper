@@ -6,7 +6,7 @@
   <title>SmartNews Living Canvas - Classical Editorial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --paper-bg: #f9f8f4;
@@ -17,7 +17,7 @@
       --accent-burgundy: #7f1d1d;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-body: 'Lora', Georgia, serif;
-      --font-sans: 'Outfit', sans-serif;
+      --font-sans: 'Inter', sans-serif;
     }
 
     * {
@@ -292,8 +292,8 @@
     /* Paragraph summary - Drop cap effect & typography */
     .news-summary {
       font-family: var(--font-body);
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 0.98rem;
+      line-height: 1.65;
       color: var(--ink-dark);
       text-align: justify;
       margin-bottom: 14px;
@@ -302,6 +302,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       transition: max-height 0.3s ease;
+      max-width: 650px; /* Golden Width */
     }
 
     /* Elegant drop cap on the first letter */
@@ -318,6 +319,111 @@
     .news-card.expanded .news-summary {
       display: block;
       -webkit-line-clamp: unset;
+    }
+
+    /* Reading Time Indicator */
+    .reading-time {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    /* Bookmark Button */
+    .bookmark-btn {
+      background: transparent;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--ink-muted);
+      transition: color 0.2s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--border-sep);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .bookmark-btn:hover {
+      color: var(--accent-burgundy);
+      border-color: var(--accent-burgundy);
+      transform: scale(1.02);
+    }
+    .bookmark-btn.active {
+      color: white;
+      background-color: var(--accent-burgundy);
+      border-color: transparent;
+    }
+
+    /* "TL;DR" Box */
+    .tldr-box {
+      background-color: #f2efe4;
+      border: 1px solid var(--border-sep);
+      border-left: 4px solid var(--accent-burgundy);
+      padding: 14px 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+      max-width: 650px; /* Golden Width */
+      display: none;
+    }
+    .news-card.expanded .tldr-box {
+      display: block;
+    }
+    .tldr-title {
+      font-family: var(--font-serif);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-burgundy);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tldr-list {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--ink-dark);
+      padding-left: 18px;
+      line-height: 1.6;
+    }
+    .tldr-list li {
+      margin-bottom: 8px;
+    }
+
+    /* Career Track Tags */
+    .career-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+    }
+    .tag-badge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      background-color: rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border-sep);
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .tag-badge:hover {
+      background-color: var(--accent-burgundy);
+      color: white;
+      border-color: transparent;
     }
 
     .card-footer {
@@ -450,7 +556,7 @@
         <div class="live-dot"></div>
         <span>Live Despatch</span>
       </div>
-      <span>Updated: <span id="last-update" class="time-badge">2026-05-30 11:40:51</span></span>
+      <span>Updated: <span id="last-update" class="time-badge">2026-05-30 11:47:27</span></span>
     </div>
   </header>
 
@@ -461,6 +567,7 @@
       <button class="tab-btn" data-category="strategy & m&a">Strategy & M&A</button>
       <button class="tab-btn" data-category="venture & disruption">Venture & Disruption</button>
       <button class="tab-btn" data-category="leadership & governance">Leadership & Governance</button>
+      <button class="tab-btn" data-category="bookmarks">Bookmarks 🔖</button>
     </div>
 
 
@@ -472,11 +579,29 @@
   <div class="news-grid" id="news-grid">
     
       
-      <div class="news-card front-page-card" data-category="strategy & m&a" data-title="universal music declines takeover offer from bill ackman’s pershing square">
-
+      <div class="news-card front-page-card" id="card-1" data-category="strategy & m&a" data-title="universal music declines takeover offer from bill ackman’s pershing square" data-summary="WASHINGTON — A significant corporate development was reported as verified briefs detail shifts regarding &#39;Universal Music declines takeover offer from Bill Ackman’s Pershing Square&#39;. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-1">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Universal Music declines takeover offer from Bill Ackman’s Pershing Square', 'card-1')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Universal Music declines takeover offer from Bill Ackman’s Pershing Square</h2>
+        
+        <div class="tldr-box" id="tldr-1">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-1">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">WASHINGTON — A significant corporate development was reported as verified briefs detail shifts regarding 'Universal Music declines takeover offer from Bill Ackman’s Pershing Square'. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.</p>
+
+        <div class="career-tags" id="tags-1">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOVGtQbnNhVmNrb2xPTkV2V2hsdkdnUGphcXF6NWdaYWhhVVQ2U3VIQXdSYU05SE0zSHo3N09EOWpHZUtUMTE1LUZxeEJQTXVHb0FlcUpEbHkzWGtpQm1lVWNUWlFnUEN2cVhNeHd4bjBxeXEwenhQcmFKVHlCaEtkNnp3Zms?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -487,11 +612,29 @@
         </div>
       </div>
       
-      <div class="news-card front-page-card" data-category="strategy & m&a" data-title="universal music group declines bill ackman takeover proposal">
-
+      <div class="news-card front-page-card" id="card-2" data-category="strategy & m&a" data-title="universal music group declines bill ackman takeover proposal" data-summary="GENEVA — A significant corporate development was reported as verified briefs detail shifts regarding &#39;Universal Music Group declines Bill Ackman takeover proposal&#39;. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-2">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Universal Music Group declines Bill Ackman takeover proposal', 'card-2')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Universal Music Group declines Bill Ackman takeover proposal</h2>
+        
+        <div class="tldr-box" id="tldr-2">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-2">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">GENEVA — A significant corporate development was reported as verified briefs detail shifts regarding 'Universal Music Group declines Bill Ackman takeover proposal'. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.</p>
+
+        <div class="career-tags" id="tags-2">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxQTVBRSFRLUkJUa0diYU5UTlJKN3RvQXp0V1cwNzJTbzNwVVVIWXlGMWxoNnRyZ01SNDE2amUwRnlWOHFaWlBaRDM1R3lSY2k4NjgzX0tEOW9IQndYT2UtaG9GVjEydlRiOVMwYmVsMlpBRE1Jc2VSZWY4V0habkpIVExlQllrQUZhZ2pxZ1drdDk0T2JsdldMaXdCbU1iYkY2dHpKZnhxYnhiTlgwM1ZhYkpqcFI?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -502,11 +645,29 @@
         </div>
       </div>
       
-      <div class="news-card front-page-card" data-category="venture & disruption" data-title="ai coding startup cognition raises $1 billion at $26 billion value">
-
+      <div class="news-card front-page-card" id="card-3" data-category="venture & disruption" data-title="ai coding startup cognition raises $1 billion at $26 billion value" data-summary="LONDON — A significant corporate development was reported as verified briefs detail shifts regarding &#39;AI Coding Startup Cognition Raises $1 Billion at $26 Billion Value&#39;. The capital allocation signals shifting sentiment in early-stage investment and represents a notable push toward scaling next-generation enterprise capabilities.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-3">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'AI Coding Startup Cognition Raises $1 Billion at $26 Billion Value', 'card-3')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">AI Coding Startup Cognition Raises $1 Billion at $26 Billion Value</h2>
+        
+        <div class="tldr-box" id="tldr-3">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-3">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">LONDON — A significant corporate development was reported as verified briefs detail shifts regarding 'AI Coding Startup Cognition Raises $1 Billion at $26 Billion Value'. The capital allocation signals shifting sentiment in early-stage investment and represents a notable push toward scaling next-generation enterprise capabilities.</p>
+
+        <div class="career-tags" id="tags-3">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQcm9aMFdXbk1qSlBTWmt6SWRuV25iaVU2RG5BbnFFT1BpMktXUEk2N1hVYXo1TldHSS1lYmhncWx4WTBfaTNvQUZNRjBIeGNWVXUyamFuTW5TX3owT19fcUxxYkdoaC1TVUF4Y1ZWTTFLVjNScDlVcGZOcFFWZnFUTG9JeDVPMUV2TTF4T0pUVVhBeVd3ZzlQVC0tMDBibzVkT24yVEdrdERfTy1IYzktdVFXVWxPZw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -517,11 +678,29 @@
         </div>
       </div>
       
-      <div class="news-card front-page-card" data-category="venture & disruption" data-title="ai coding startup cognition raises $1b at $25b pre-money valuation">
-
+      <div class="news-card front-page-card" id="card-4" data-category="venture & disruption" data-title="ai coding startup cognition raises $1b at $25b pre-money valuation" data-summary="LONDON — Cognition, the makers of the autonomous AI software engineer named Devin, has raised more than $1 billion at a $25 billion pre-money valuation ($26 billion post money), the company announced on Wednesday. Last year, all signs pointed to model makers swallowing this hot market themselves.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-4">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'AI coding startup Cognition raises $1B at $25B pre-money valuation', 'card-4')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">AI coding startup Cognition raises $1B at $25B pre-money valuation</h2>
+        
+        <div class="tldr-box" id="tldr-4">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-4">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">LONDON — Cognition, the makers of the autonomous AI software engineer named Devin, has raised more than $1 billion at a $25 billion pre-money valuation ($26 billion post money), the company announced on Wednesday. Last year, all signs pointed to model makers swallowing this hot market themselves.</p>
+
+        <div class="career-tags" id="tags-4">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOQzd0YXo5MWwzZmhuUkxZWktSZFBQdnVNRVBJaGlUQlJnUng3d0dPaF9FWUF6RGVDR0ZNWVdfRlA2YlhLbWVydlhsRmpqS21zb2hKYVgxbjNoOHZFUEhMQVFVZ3RnTDZ2SWpYYXRMQUotaF9OQmhKRHB0bk44NjFRZm8wV0tPSzZJMDg4clZTbUdjajBVbk5UdXNfN2Eza1BD?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -532,11 +711,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="macro & markets" data-title="fed governor michelle bowman warns against hiking interest rates because of inflation spike">
-
+      <div class="news-card " id="card-5" data-category="macro & markets" data-title="fed governor michelle bowman warns against hiking interest rates because of inflation spike" data-summary="SINGAPORE — Federal Reserve Governor Michelle Bowman on Friday cautioned against raising interest rates to address the current spike in prices. With inflation running well above the central bank&#39;s 2% target, markets are expecting the Fed to stay on hold this year then possibly start raising rates in early 2027.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-5">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Fed Governor Michelle Bowman warns against hiking interest rates because of inflation spike', 'card-5')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Fed Governor Michelle Bowman warns against hiking interest rates because of inflation spike</h2>
+        
+        <div class="tldr-box" id="tldr-5">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-5">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">SINGAPORE — Federal Reserve Governor Michelle Bowman on Friday cautioned against raising interest rates to address the current spike in prices. With inflation running well above the central bank's 2% target, markets are expecting the Fed to stay on hold this year then possibly start raising rates in early 2027.</p>
+
+        <div class="career-tags" id="tags-5">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSU1FUWtLRzNfdWhmdVJvYVBMeFpYaVowRGhjUFN4NXZmbzdVNUx1OFAzdE42YktoU2tfOHNfeE5uNzdFNDdreXBZX0lBMDM3a0otZkhJbFgxaGlPSm9Kam44SW92bmkwX0lBeTZidmlDdEVVaGdxOFNmQUY3Q0d1UFJ4RmRMT0JGVUFLWlJad3VRVHk2YTRYRmRxVzZjUk9SWHdnRUw5MTNCemvSAbABQVVfeXFMTVVRMVlKLXIzTUdra0lSZm44VWxLWWozUF9vY0RTRHZPbExxcDRQQmVhb1pZU01rZGVLUEtyTDcyT2k4LUMwNU9PX2t5dFhPci1YTTJtbXU5blQzQnFkMEM4cy1BVjJTTE43NWtBZWpGTXJRSlZQWnI3YnJQS2ROOXdXVVFPX0MtVjdkck1GbUhNU0tFaUlaVU8yVUFMcDVTR05ScktyLXk1YkFvNDExd1o?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -547,11 +744,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="macro & markets" data-title="oxyzo financial services fy26 net profit rises 11% to rs 375 crore, on 23% revenue jump">
-
+      <div class="news-card " id="card-6" data-category="macro & markets" data-title="oxyzo financial services fy26 net profit rises 11% to rs 375 crore, on 23% revenue jump" data-summary="MUMBAI — Listen to this article in summarized format (Catch all the Technology News News, and Latest News Updates on The Economic Times.) The developing macroeconomic landscape is expected to influence broader interest rate projections and corporate credit yields over the coming quarters.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-6">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Oxyzo Financial Services FY26 net profit rises 11% to Rs 375 crore, on 23% revenue jump', 'card-6')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Oxyzo Financial Services FY26 net profit rises 11% to Rs 375 crore, on 23% revenue jump</h2>
+        
+        <div class="tldr-box" id="tldr-6">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-6">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">MUMBAI — Listen to this article in summarized format (Catch all the Technology News News, and Latest News Updates on The Economic Times.) The developing macroeconomic landscape is expected to influence broader interest rate projections and corporate credit yields over the coming quarters.</p>
+
+        <div class="career-tags" id="tags-6">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://economictimes.indiatimes.com/tech/technology/oxyzo-financial-services-fy26-net-profit-rises-11-to-rs-375-crore-on-23-revenue-jump/articleshow/131383349.cms" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -562,11 +777,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="macro & markets" data-title="forward deployed engineer: what it is and how to build a successful career">
-
+      <div class="news-card " id="card-7" data-category="macro & markets" data-title="forward deployed engineer: what it is and how to build a successful career" data-summary="GENEVA — A Forward Deployed Engineer (FDE) is a software engineer who works directly with customers to solve business problems using technology. They combine software engineering, consulting, product thinking, and customer communication.Unlike traditional developers who mainly work inside engineering teams, Forward Deployed Engineers spend significant time understanding customer needs, building solutions, deploying systems, and helping customers achieve results.Last Updated: May 2026Abstract / OverviewThe rise of Artificial Intelligence, cloud computing, and enterprise software has created demand for a new type of engineer.Companies no longer want technology alone.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-7">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Forward Deployed Engineer: What It Is and How to Build a Successful Career', 'card-7')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Forward Deployed Engineer: What It Is and How to Build a Successful Career</h2>
+        
+        <div class="tldr-box" id="tldr-7">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-7">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">GENEVA — A Forward Deployed Engineer (FDE) is a software engineer who works directly with customers to solve business problems using technology. They combine software engineering, consulting, product thinking, and customer communication.Unlike traditional developers who mainly work inside engineering teams, Forward Deployed Engineers spend significant time understanding customer needs, building solutions, deploying systems, and helping customers achieve results.Last Updated: May 2026Abstract / OverviewThe rise of Artificial Intelligence, cloud computing, and enterprise software has created demand for a new type of engineer.Companies no longer want technology alone.</p>
+
+        <div class="career-tags" id="tags-7">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://www.c-sharpcorner.com/article/forward-deployed-engineer-what-it-is-and-how-to-build-a-successful-career/" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -577,11 +810,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="venture & disruption" data-title="新加坡創投熱錢湧向 ai 與金融科技 2025 年募資達 59 億美元">
-
+      <div class="news-card " id="card-8" data-category="venture & disruption" data-title="新加坡創投熱錢湧向 ai 與金融科技 2025 年募資達 59 億美元" data-summary="SINGAPORE — 儘管整體創投活動趨於溫和，人工智慧（AI）、deep tech（高門檻前沿技術）及金融科技（Fintech）領域在 2025 年仍是新加坡創業投資的熱點。根據《Singapore Business Review》報導，去年新加坡本地企業共透過 472 筆創投交易，成功募得 59 億美元資金。 新加坡企業局（EnterpriseSG）指出，AI 領域的交易金額在 2025 年大幅成長 30%，達到逾 18 億美元，佔新加坡總創投交易金額的 30%。AI 新創公司在總交易量中的佔比也從 2024 年的 30.9% 躍升至 2025 年的 42.8%。此外，專注於 AI 的新創公司（AI-native）的單筆中位數融資規模更增長了 40%，達到約 892 萬美元，顯示出投資人對於具備可擴展資料優勢的 AI 平台和應用案例的高度興趣。 金融科技則仍是最大的募資領域，其交易金額在 2025 年較前一年增長 34%，達到逾 21 億美元。值得注意的是，新加坡的金融科技募資金額佔了東南亞國家協會（ASEAN-6，包括印尼、馬來西亞、菲律賓、泰國和越南）總額的 74%。 即使面臨更廣泛的市場逆風，deep tech 在新加坡創投生態系統中的佔比也持續擴大。其交易金額佔比從 2022 年的 11.1% 上升至 2025 年的 24.7%，而交易量佔比也從 11.4% 增加到 19.3%。 新加坡企業局創新助理常務董事 Emily Liew 表示，新加坡健全的創業生態系統使其能夠有效應對挑戰，並在 AI 和 deep tech 等重點新興領域持續提升能力。她同時提到，新加坡政府透過「研究、創新與企業 2030 藍圖」（Research, Innovation and...">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-8">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, '新加坡創投熱錢湧向 AI 與金融科技 2025 年募資達 59 億美元', 'card-8')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">新加坡創投熱錢湧向 AI 與金融科技 2025 年募資達 59 億美元</h2>
+        
+        <div class="tldr-box" id="tldr-8">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-8">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">SINGAPORE — 儘管整體創投活動趨於溫和，人工智慧（AI）、deep tech（高門檻前沿技術）及金融科技（Fintech）領域在 2025 年仍是新加坡創業投資的熱點。根據《Singapore Business Review》報導，去年新加坡本地企業共透過 472 筆創投交易，成功募得 59 億美元資金。 新加坡企業局（EnterpriseSG）指出，AI 領域的交易金額在 2025 年大幅成長 30%，達到逾 18 億美元，佔新加坡總創投交易金額的 30%。AI 新創公司在總交易量中的佔比也從 2024 年的 30.9% 躍升至 2025 年的 42.8%。此外，專注於 AI 的新創公司（AI-native）的單筆中位數融資規模更增長了 40%，達到約 892 萬美元，顯示出投資人對於具備可擴展資料優勢的 AI 平台和應用案例的高度興趣。 金融科技則仍是最大的募資領域，其交易金額在 2025 年較前一年增長 34%，達到逾 21 億美元。值得注意的是，新加坡的金融科技募資金額佔了東南亞國家協會（ASEAN-6，包括印尼、馬來西亞、菲律賓、泰國和越南）總額的 74%。 即使面臨更廣泛的市場逆風，deep tech 在新加坡創投生態系統中的佔比也持續擴大。其交易金額佔比從 2022 年的 11.1% 上升至 2025 年的 24.7%，而交易量佔比也從 11.4% 增加到 19.3%。 新加坡企業局創新助理常務董事 Emily Liew 表示，新加坡健全的創業生態系統使其能夠有效應對挑戰，並在 AI 和 deep tech 等重點新興領域持續提升能力。她同時提到，新加坡政府透過「研究、創新與企業 2030 藍圖」（Research, Innovation and...</p>
+
+        <div class="career-tags" id="tags-8">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://tw.stock.yahoo.com/news/%E6%96%B0%E5%8A%A0%E5%9D%A1%E5%89%B5%E6%8A%95%E7%86%B1%E9%8C%A2%E6%B9%A7%E5%90%91-ai-%E8%88%87%E9%87%91%E8%9E%8D%E7%A7%91%E6%8A%80-2025-%E5%B9%B4%E5%8B%9F%E8%B3%87%E9%81%94-042317087.html" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -592,11 +843,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="macro & markets" data-title="anthropic raises $65 billion, nears $1t valuation ahead of ipo">
-
+      <div class="news-card " id="card-9" data-category="macro & markets" data-title="anthropic raises $65 billion, nears $1t valuation ahead of ipo" data-summary="NEW DELHI — Anthropic has snagged $65 billion in funding at a $965 billion post-money valuation in its latest funding round, marking what could be the AI startup’s last private fundraising before debuting on the public markets. Strategic infrastructure partners, including Samsung, SK Hynix, and Micron, also joined the round.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-9">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Anthropic raises $65 billion, nears $1T valuation ahead of IPO', 'card-9')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Anthropic raises $65 billion, nears $1T valuation ahead of IPO</h2>
+        
+        <div class="tldr-box" id="tldr-9">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-9">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">NEW DELHI — Anthropic has snagged $65 billion in funding at a $965 billion post-money valuation in its latest funding round, marking what could be the AI startup’s last private fundraising before debuting on the public markets. Strategic infrastructure partners, including Samsung, SK Hynix, and Micron, also joined the round.</p>
+
+        <div class="career-tags" id="tags-9">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPNFJZbFFxa0ZvbjBzTzhhbm9jMnVPYTFJdW1JdjU4NE5qblhSVTJrQkxna0lneXo1T1IxZnE2UFd6dm82VDFpcW1HaWEwcVJDaUJtUGJHZWg4UDBUd0otWDNFbzVhbWFuQ3kzbm5odjNBeGw0YkFhMDhEcllVcDR4dXhnMmJ6MFhPZGt5YW1VNkZzWXNlbkJWcldn?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -607,11 +876,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="leadership & governance" data-title="in china, amd ceo lisa su is understated while nvidia's huang is more razzmatazz">
-
+      <div class="news-card " id="card-10" data-category="leadership & governance" data-title="in china, amd ceo lisa su is understated while nvidia's huang is more razzmatazz" data-summary="BEIJING — A significant corporate development was reported as verified briefs detail shifts regarding &#39;In China, AMD CEO Lisa Su is understated while Nvidia&#39;s Huang is more razzmatazz&#39;. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-10">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'In China, AMD CEO Lisa Su is understated while Nvidia&#39;s Huang is more razzmatazz', 'card-10')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">In China, AMD CEO Lisa Su is understated while Nvidia's Huang is more razzmatazz</h2>
+        
+        <div class="tldr-box" id="tldr-10">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-10">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">BEIJING — A significant corporate development was reported as verified briefs detail shifts regarding 'In China, AMD CEO Lisa Su is understated while Nvidia's Huang is more razzmatazz'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
+
+        <div class="career-tags" id="tags-10">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOenc2VTkxWDAwWWhITVY3dkhZZktPRTZIVVNtRE0wMFRraXQtY3FnWXljVmFjd0dsMjRMekE0aktuRnNWMW9tTzZZR3JLbHpPWTA3eDc0dkkxSGp2M1NLLUlpNTBPb2J1X0VseVpncTZpYl9mSU9lT0VBel95ZnlqZzAzbVFZUUxFZlJqdkEzYVVvdWlhVHVINnlidVUwTVRpUmNCVk1NNkMyMzBxakpoNDVOMHZEQnRRY0QzTFVqOWI?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -622,11 +909,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="macro & markets" data-title="us to appeal judge’s order for broad refund of trump tariffs">
-
+      <div class="news-card " id="card-11" data-category="macro & markets" data-title="us to appeal judge’s order for broad refund of trump tariffs" data-summary="LONDON — A significant corporate development was reported as verified briefs detail shifts regarding &#39;US to Appeal Judge’s Order for Broad Refund of Trump Tariffs&#39;. The developing macroeconomic landscape is expected to influence broader interest rate projections and corporate credit yields over the coming quarters.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-11">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'US to Appeal Judge’s Order for Broad Refund of Trump Tariffs', 'card-11')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">US to Appeal Judge’s Order for Broad Refund of Trump Tariffs</h2>
+        
+        <div class="tldr-box" id="tldr-11">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-11">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">LONDON — A significant corporate development was reported as verified briefs detail shifts regarding 'US to Appeal Judge’s Order for Broad Refund of Trump Tariffs'. The developing macroeconomic landscape is expected to influence broader interest rate projections and corporate credit yields over the coming quarters.</p>
+
+        <div class="career-tags" id="tags-11">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxNd3FObDNNUHo2MlpjZFFPREhJaTZ5Q3BLMElGYXVPcldZVmltaW5kUGozSUh4MUhMUkdld1ZDTzY1czAtN09pMWo3NG91YmxMWjBZOHBocUZJcFVtbHBtcmhkREJBcVh5b05WNTZIWnpkVU81dkhYeVA1bk5qQ3NUM0pMZ0l4VldMbXZMT3cxVm1oM3p4UHZwU19LWXF0eUdJMUZONzBHSThyWjM2cE1RUA?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -637,11 +942,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="macro & markets" data-title="kalshi is moving beyond prediction markets and into one of crypto's biggest trading lanes">
-
+      <div class="news-card " id="card-12" data-category="macro & markets" data-title="kalshi is moving beyond prediction markets and into one of crypto's biggest trading lanes" data-summary="MUMBAI — Prediction markets giant Kalshi announced Friday it plans to launch perpetual futures contracts, starting with crypto perpetuals. traders a regulated alternative to offshore platforms that have dominated this market.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-12">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Kalshi is moving beyond prediction markets and into one of crypto&#39;s biggest trading lanes', 'card-12')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Kalshi is moving beyond prediction markets and into one of crypto's biggest trading lanes</h2>
+        
+        <div class="tldr-box" id="tldr-12">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-12">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">MUMBAI — Prediction markets giant Kalshi announced Friday it plans to launch perpetual futures contracts, starting with crypto perpetuals. traders a regulated alternative to offshore platforms that have dominated this market.</p>
+
+        <div class="career-tags" id="tags-12">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxNejNoc1c2UFNFeFRncnU1THlPaTcxT2p6X3ZfTVc2UWk5MjRwTUlrUlFESXVOX3lGWkxQNDlqTmRqQU13anlfWnl6UkRtWU9JSUR6aW1QWWVpX29kQzFtTDE3MU5iNWZ0dHU4N29mekFqRDRadHNPOUZNcjd5MG00ZlAzdjktbkJjRzRSQUZ0d3F0UEo2cHItc1pPaV9PbFJLVU5ZMmN0bHhvalZYcUlRSW1nbHpyd3pvVFdmeWIzeVlsNEnSAcgBQVVfeXFMTi1jOGZkLURpYUFTN0hpbHB0QTJYbjlGVlFmVTBpUTVaRmtiT2VoMGhNTlVGRzZhQllSTlFQOHgzTWhtR0ZBcEpWMG9GU2plT0FxWFcxd1dock9Qd0pCb2s3TEttb3lKSUNPX3JETHZkMy1LbjZMYlpUQmdlMVRGY3Y3bi1UYW5UMHMzLTByeDNmTEtCMlNWUnFFYV9hNlJnYWpBZ25UbmNIRDlJSGhVMUVwV1FVbU1LM0czQ2Vyb1c0Wk9na1FHZUk?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -652,11 +975,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="strategy & m&a" data-title="easyjet draws takeover interest from private credit firm castlelake">
-
+      <div class="news-card " id="card-13" data-category="strategy & m&a" data-title="easyjet draws takeover interest from private credit firm castlelake" data-summary="SINGAPORE — A significant corporate development was reported as verified briefs detail shifts regarding &#39;EasyJet draws takeover interest from private credit firm Castlelake&#39;. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-13">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'EasyJet draws takeover interest from private credit firm Castlelake', 'card-13')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">EasyJet draws takeover interest from private credit firm Castlelake</h2>
+        
+        <div class="tldr-box" id="tldr-13">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-13">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">SINGAPORE — A significant corporate development was reported as verified briefs detail shifts regarding 'EasyJet draws takeover interest from private credit firm Castlelake'. Industry analysts expect the strategic consolidation to reshape competitive dynamics and potentially trigger regulatory scrutiny from antitrust commissions.</p>
+
+        <div class="career-tags" id="tags-13">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQa3JraGtqUHVJZG04SDdiZUFObGdiOEpSNlJlNm95Yk1vYXJudjJsRWEyQzJaQ090azBGUFVJU2FLTEp4WDlOb3l4amtMeUVmaEVyTVdabmlPNThWOF84cWZ3VWo3dnlHYlBKWUxGWTFqa0UteU1jLUFMVXo0bF9TcXJobDY?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -667,11 +1008,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="leadership & governance" data-title="danish pension blacklists spacex over ‘catastrophic governance’">
+      <div class="news-card " id="card-14" data-category="leadership & governance" data-title="danish pension fund blacklists spacex, citing governance issues" data-summary="WASHINGTON — A significant corporate development was reported as verified briefs detail shifts regarding &#39;Danish Pension Fund Blacklists SpaceX, Citing Governance Issues&#39;. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-14">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Danish Pension Fund Blacklists SpaceX, Citing Governance Issues', 'card-14')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
+        <h2 class="news-title">Danish Pension Fund Blacklists SpaceX, Citing Governance Issues</h2>
+        
+        <div class="tldr-box" id="tldr-14">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-14">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
 
-        <h2 class="news-title">Danish Pension Blacklists SpaceX Over ‘Catastrophic Governance’</h2>
-        <p class="news-summary">SINGAPORE — A significant corporate development was reported as verified briefs detail shifts regarding 'Danish Pension Blacklists SpaceX Over ‘Catastrophic Governance’'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
+        <p class="news-summary">WASHINGTON — A significant corporate development was reported as verified briefs detail shifts regarding 'Danish Pension Fund Blacklists SpaceX, Citing Governance Issues'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
+
+        <div class="career-tags" id="tags-14">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQWjNQTzhxdi1QUF8zNUJKNVo4QkVadmVaNmRkS1NWQUc5TVAweWIyNUN2QmREX3JiMGw0RWlnMWtBTXdTb3lzX3lEWENmdDlkbHlFcmRYSk53bmVNV3BRMkg4ZURYMTJJVUF1eWlfaDdqNElpT1VKeFpxY0E3WlhSZFQ0S0tVSmZQbXduRGpEaVFYUDdYbjUzZTljYXNQVWU4dzdWUlIxcGdyYzY4MER5QmJBdw?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -682,11 +1041,29 @@
         </div>
       </div>
       
-      <div class="news-card " data-category="leadership & governance" data-title="social media companies to pay $27 million to settle kentucky school district's lawsuit, records show">
-
+      <div class="news-card " id="card-15" data-category="leadership & governance" data-title="social media companies to pay $27 million to settle kentucky school district's lawsuit, records show" data-summary="TOKYO — A significant corporate development was reported as verified briefs detail shifts regarding &#39;Social media companies to pay $27 million to settle Kentucky school district&#39;s lawsuit, records show&#39;. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="reading-time" id="time-15">⏱️ 2 min read</div>
+          <button class="bookmark-btn" onclick="toggleBookmark(event, 'Social media companies to pay $27 million to settle Kentucky school district&#39;s lawsuit, records show', 'card-15')" title="Save for Later">
+            ☆ Save
+          </button>
+        </div>
 
         <h2 class="news-title">Social media companies to pay $27 million to settle Kentucky school district's lawsuit, records show</h2>
+        
+        <div class="tldr-box" id="tldr-15">
+          <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+          <ul class="tldr-list" id="tldr-list-15">
+            <!-- Filled dynamically in javascript -->
+          </ul>
+        </div>
+
         <p class="news-summary">TOKYO — A significant corporate development was reported as verified briefs detail shifts regarding 'Social media companies to pay $27 million to settle Kentucky school district's lawsuit, records show'. The governance adjustment highlights critical stakeholder pressures and will likely prompt boardroom reviews regarding administrative accountability.</p>
+
+        <div class="career-tags" id="tags-15">
+          <!-- Filled dynamically in javascript -->
+        </div>
+
         <div class="card-footer">
           <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPOTF5Njhna0RCOG1QZ29JXy1EdXgtNEtmWU02aXNldTdFeDZzZ1d4U0lfNGQzNml1UjlKaWtxdF8wV0RQUVRQejBfNHhGMk1hYVhiVVhmSDRvYjMtSXVXd0RGV2xOMmtXVFpfYmxLYnZpUVZvZDZLc0tqOFAxSFNFdEJVa3lNWjg5MGdWbi1iczc5SGk4bFNVdDlmWnpMLWtNQjdPWXk5YnUxTzJjZC1FMHhoRDZ2OVFxekE2OUJaRWs?oc=5" target="_blank" class="read-more" onclick="event.stopPropagation();">
             Read original source »
@@ -704,6 +1081,127 @@
 <script>
   let activeCategory = 'all';
   let searchQuery = '';
+
+  // ----------------- MBA HELPER FUNCTIONS -----------------
+  function populateCardDetails(card) {
+    const title = (card.querySelector('.news-title').textContent || '').trim();
+    const summary = card.getAttribute('data-summary') || '';
+    const category = (card.getAttribute('data-category') || '').toLowerCase();
+    const idSuffix = card.id.replace('card-', '');
+    
+    // 1. Calculate reading time
+    const wordCount = summary.split(/\s+/).length + title.split(/\s+/).length;
+    const readMin = Math.max(1, Math.ceil(wordCount / 180));
+    const timeEl = document.getElementById(`time-${idSuffix}`);
+    if (timeEl) {
+      timeEl.textContent = `⏱️ ${readMin} min read`;
+    }
+    
+    // 2. Determine Career Tags
+    let tags = [];
+    if (category.includes('macro') || category.includes('market')) {
+      tags = ['#Strategy', '#Consulting', '#MacroOps'];
+    } else if (category.includes('strategy') || category.includes('m&a') || category.includes('m & a')) {
+      tags = ['#Strategy', '#PlacementPrep', '#InvestmentBanking'];
+    } else if (category.includes('venture') || category.includes('disrupt')) {
+      tags = ['#FinTech', '#VentureCapital', '#EnterpriseAI'];
+    } else if (category.includes('leadership') || category.includes('govern')) {
+      tags = ['#Consulting', '#CorporateGovernance', '#CampusBuzz'];
+    } else {
+      tags = ['#Strategy', '#Consulting'];
+    }
+    
+    const tagsEl = document.getElementById(`tags-${idSuffix}`);
+    if (tagsEl) {
+      tagsEl.innerHTML = tags.map(t => `<span class="tag-badge" onclick="event.stopPropagation(); filterByTag('${t}')">${t}</span>`).join('');
+    }
+    
+    // 3. Generate 3 Bullets for TL;DR
+    const sentences = summary.split(/[.!?]\s+/).filter(s => s.trim().length > 10);
+    const bullets = [];
+    
+    // Bullet 1: Core Action
+    if (sentences[0]) {
+      const cleanS1 = sentences[0].replace(/^[A-Z\s]+—\s*/, '');
+      bullets.push(`<strong>Key Development:</strong> ${cleanS1}`);
+    } else {
+      bullets.push(`<strong>Key Development:</strong> Strategic changes occurring around headline topic.`);
+    }
+    
+    // Bullet 2: Implication
+    if (sentences[1]) {
+      bullets.push(`<strong>Implication:</strong> ${sentences[1]}`);
+    } else {
+      bullets.push(`<strong>Implication:</strong> Realigns competitive dynamics and forces operational repositioning.`);
+    }
+    
+    // Bullet 3: Strategic Case Insight based on category
+    let insight = '';
+    if (category.includes('macro') || category.includes('market')) {
+      insight = '<strong>Strategy Focus:</strong> Monitor interest rates, credit yields, and trade tariff projections for strategic cash-flow and valuation models.';
+    } else if (category.includes('strategy') || category.includes('m&a') || category.includes('m & a')) {
+      insight = '<strong>M&A Focus:</strong> Track consolidation benchmarks and potential regulatory blocks from antitrust bodies for corporate strategy cases.';
+    } else if (category.includes('venture') || category.includes('disrupt')) {
+      insight = '<strong>VC & Tech Focus:</strong> Evaluate early-stage capital allocation velocity and runway scaling requirements for enterprise software targets.';
+    } else {
+      insight = '<strong>Governance Focus:</strong> Study board succession mechanics and activist shareholder proxy battles to prepare for corporate restructuring rounds.';
+    }
+    bullets.push(insight);
+    
+    const listEl = document.getElementById(`tldr-list-${idSuffix}`);
+    if (listEl) {
+      listEl.innerHTML = bullets.map(b => `<li>${b}</li>`).join('');
+    }
+    
+    // 4. Set Bookmark Active state
+    const saved = JSON.parse(localStorage.getItem('saved-bookmarks') || '[]');
+    const bookmarkBtn = card.querySelector('.bookmark-btn');
+    if (bookmarkBtn) {
+      if (saved.includes(title)) {
+        bookmarkBtn.classList.add('active');
+        bookmarkBtn.textContent = '★ Saved';
+      } else {
+        bookmarkBtn.classList.remove('active');
+        bookmarkBtn.textContent = '☆ Save';
+      }
+    }
+  }
+
+  function filterByTag(tag) {
+    searchQuery = tag;
+    document.getElementById('search-input').value = tag;
+    filterCards();
+  }
+
+  function toggleBookmark(event, title, cardId) {
+    event.stopPropagation();
+    let saved = JSON.parse(localStorage.getItem('saved-bookmarks') || '[]');
+    const card = document.getElementById(cardId);
+    const btn = card.querySelector('.bookmark-btn');
+    const cleanTitle = title.replace(/\\'/g, "'").trim();
+    
+    if (saved.includes(cleanTitle)) {
+      saved = saved.filter(t => t !== cleanTitle);
+      btn.classList.remove('active');
+      btn.textContent = '☆ Save';
+    } else {
+      saved.push(cleanTitle);
+      btn.classList.add('active');
+      btn.textContent = '★ Saved';
+    }
+    
+    localStorage.setItem('saved-bookmarks', JSON.stringify(saved));
+    if (activeCategory === 'bookmarks') {
+      filterCards();
+    }
+  }
+
+  function initCardDetails() {
+    document.querySelectorAll('.news-card').forEach(card => {
+      populateCardDetails(card);
+    });
+  }
+  // ---------------------------------------------------------
 
   // ----------------- C2 SUBSCRIBER CODE -----------------
   // Listen for BroadcastChannel message or parent message event
@@ -777,11 +1275,22 @@
   // Filter headlines based on category tab & search box
   function filterCards() {
     let visibleCount = 0;
+    const saved = JSON.parse(localStorage.getItem('saved-bookmarks') || '[]');
+    
     document.querySelectorAll('.news-card').forEach(card => {
-      const cardCategory = card.getAttribute('data-category');
-      const cardTitle = card.getAttribute('data-title');
+      const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
+      const cardTitle = (card.getAttribute('data-title') || '').toLowerCase();
+      const cleanTitle = (card.querySelector('.news-title').textContent || '').trim();
       
-      const matchesCategory = (activeCategory === 'all' || cardCategory === activeCategory);
+      let matchesCategory = false;
+      if (activeCategory === 'all') {
+        matchesCategory = true;
+      } else if (activeCategory === 'bookmarks') {
+        matchesCategory = saved.includes(cleanTitle);
+      } else {
+        matchesCategory = (cardCategory === activeCategory);
+      }
+      
       const matchesSearch = (!searchQuery || cardTitle.includes(searchQuery.toLowerCase()));
       
       if (matchesCategory && matchesSearch) {
@@ -826,6 +1335,7 @@
 
   // Initial bindings
   initCardListeners();
+  initCardDetails();
 
   // JETRO Dynamic Live Refresh Binding Event Listener!
   document.addEventListener('jet:refresh', function(event) {
@@ -841,15 +1351,40 @@
       const grid = document.getElementById('news-grid');
       grid.innerHTML = ''; // clear grid
 
-      data.articles.forEach(article => {
+      data.articles.forEach((article, index) => {
         const card = document.createElement('div');
+        card.id = `card-${index + 1}`;
         card.className = 'news-card' + (article.front_page ? ' front-page-card' : '');
         card.setAttribute('data-category', article.category.toLowerCase());
         card.setAttribute('data-title', article.title.toLowerCase());
+        card.setAttribute('data-summary', article.summary);
+        
+        // Escape quotes to prevent parsing errors
+        const escapedTitle = article.title.replace(/'/g, "\\'").replace(/"/g, '\\"');
         
         card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div class="reading-time" id="time-${index + 1}">⏱️ 2 min read</div>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, '${escapedTitle}', 'card-${index + 1}')" title="Save for Later">
+              ☆ Save
+            </button>
+          </div>
+
           <h2 class="news-title">${article.title}</h2>
+          
+          <div class="tldr-box" id="tldr-${index + 1}">
+            <div class="tldr-title">💡 Executive Takeaways (TL;DR)</div>
+            <ul class="tldr-list" id="tldr-list-${index + 1}">
+              <!-- Filled dynamically -->
+            </ul>
+          </div>
+
           <p class="news-summary">${article.summary}</p>
+
+          <div class="career-tags" id="tags-${index + 1}">
+            <!-- Filled dynamically -->
+          </div>
+
           <div class="card-footer">
             <a href="${article.url}" target="_blank" class="read-more" onclick="event.stopPropagation();">
               Read original source »
@@ -864,6 +1399,7 @@
 
       // Re-init events and apply active filters
       initCardListeners();
+      initCardDetails();
       filterCards();
     }
   });
